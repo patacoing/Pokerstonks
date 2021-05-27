@@ -1,0 +1,50 @@
+#contenu{
+    background-color: #a31b1b;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width:100%;
+    z-index: -1;
+}
+
+#slogan{
+    text-align: center;
+    position: relative;
+    background-image: url(../images/pio.png);
+    background-repeat: no-repeat;
+    background-size:cover;
+    top:150px;
+    color:white;
+    text-shadow: black 0.1em 0.1em 0.2em;
+    height:300px;
+}
+#slogan *{
+    line-height: 150px;
+}
+#slogan h1{
+    font-size: 70px;
+}
+#slogan h3{
+    font-size:40px;
+}
+#info{
+    position: absolute;
+    text-align:justify;
+    bottom:100px;
+    overflow: hidden;
+    padding: 15px;
+    height:200px;
+    width:100%;
+    color:white;
+    font-weight: bold;
+}
+#info > .row {
+    height:100%;
+}
+#info > .row > .col-6 {
+    height:100%;
+}
+#info > .row > .col-6 > .row {
+    height:33%;
+}
