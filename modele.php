@@ -39,7 +39,10 @@ function creerhistorique($idUser,$idPartie){
     $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
     return SQLInsert($sql);
 }
-
+function listeUserDansPartie($idPartie){
+    $sql = "SELECT user.idUser,user.pseudo,user.argent FROM user,historique WHERE historique.idPartie='$idPartie' AND user.iduser=historique.idUser";
+    return parcoursRs(SQLSelect($sql));
+}
 
 
 function userDansPartie($idUser){
