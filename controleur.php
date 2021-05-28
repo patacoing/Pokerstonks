@@ -35,6 +35,22 @@ switch($action){
         $qs = "?view=accueil";
     break;
     
+    case "Créer":
+        if($pseudo = valider("pseudo","SESSION"))
+        if($nbjoueur = valider("nbjoueur","GET"))
+        if($temps = valider("temps","GET"))
+        if($cave = valider("cave","GET"))
+        {
+        creerPartie($nbjoueur,$temps,$cave);
+        $qs = "?view=partie";
+        }
+        else{
+            $qs = "?view=jouer";
+        }
+        break;
+        
+
+    
 
     
 }

@@ -25,6 +25,10 @@ function infoUser($pseudo,$idUser=-1){
     if($idUser != -1) $sql .= "OR (iduser='$idUser')";
     return parcoursRs(SQLSelect($sql))[0];
 }
+function creerPartie($nbpers,$temps,$cave){
+    $sql = "INSERT INTO partie VALUES(0,'$nbpers','$temps',1,'$cave')";
+    return SQLInsert($sql);
+}
 
 
 ?>
