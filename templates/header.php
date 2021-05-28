@@ -31,8 +31,8 @@ $pseudo = valider("pseudo","SESSION");
             </li>
             <?php 
           }
-          if($idPartie = valider("idPartie","SESSION")){
-            ?>
+          if(($idPartie = valider("idPartie","COOKIE")) && $pseudo){
+          ?>
             <li class="nav-item">
                 <a class="nav-link" href="index.php?view=partie&idPartie=<?php echo $idPartie;?>" style="margin-right:20px">Partie</a>
             </li>

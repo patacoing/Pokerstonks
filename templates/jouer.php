@@ -8,6 +8,7 @@ if(!$pseudo) header("Location:index.php?view=accueil");
 
 <?php
     $maPartie = userDansPartie($_SESSION['idUser']);
+    if($idPartie = valider("idPartie","COOKIE")) header("Location:index.php?view=partie&idPartie=".$idPartie);
     if(!count($maPartie)){
 ?>
 <h2>Rejoindre une partie</h2>
@@ -57,5 +58,5 @@ for($i=0;$i<count($parties);$i++){
     <input type="submit" name="action" value="Créer"> 
 </form>
 <?php
-    }else echo "<br>Vous êtes déjà dans une partie !";
+    }
 ?>
