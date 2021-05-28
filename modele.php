@@ -27,7 +27,7 @@ function infoUser($pseudo,$idUser=-1){
 }
 
 function listerParties(){
-    $sql = "SELECT * FROM partie";
+    $sql = "SELECT * FROM partie WHERE nbJoueurs<nbJoueurMax";
     return parcoursRs(SQLSelect($sql));
 }
 
@@ -39,4 +39,18 @@ function creerhistorique($idUser,$idPartie){
     $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
     return SQLInsert($sql);
 }
+
+
+function userDansPartie($idUser){
+    $sql = "SELECT * FROM historique WHERE idUser='$idUser'";
+    return parcoursRs(SQLSelect($sql));
+}
+
+function addJoueurPartie($idPartie,$idUser){
+    $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
+    SQLInsert($sql);
+    $sql = "UPDATE partie SET nbJoueurs=nbJoueurs+1 WHERE idPartie='$idPartie'";
+    SQLUpdate($sql);
+}
+
 ?>
