@@ -29,9 +29,20 @@ $pseudo = valider("pseudo","SESSION");
             <li class="nav-item">
                 <a class="nav-link" href="index.php?view=jouer" style="margin-right:20px">Jouer</a>
             </li>
-            <?php }?>
+            <?php 
+          }
+          if($idPartie = valider("idPartie","SESSION")){
+            ?>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php?view=partie&idPartie=<?php echo $idPartie;?>" style="margin-right:20px">Partie</a>
+            </li>
+            <?php
+          }
+          ?>
       </ul>
-      <?php if($pseudo) echo '<span class="navbar-text fw-bold text-white">Solde : '.$_SESSION['argent'].' €</span>';?>
+      <?php if($pseudo) echo '<span class="navbar-text fw-bold text-white">Solde : '.$_SESSION['argent'].' €</span>';
+      
+      ?>
     </div>
   </div>
 </nav>

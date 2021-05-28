@@ -43,7 +43,8 @@ switch($action){
         {
         $id = creerPartie($nbjoueur,$temps,$cave);
         creerhistorique($_SESSION["idUser"],$id);
-        $qs = "?view=partie";
+        $qs = "?view=partie&idPartie=$id";
+        $_SESSION["idPartie"] = $id;
         }
         else{
             $qs = "?view=jouer";
@@ -54,8 +55,9 @@ switch($action){
         if($pseudo = valider("pseudo","SESSION"))
         if($idPartie = valider("idPartie")){
             addJoueurPartie($idPartie,$_SESSION["idUser"]);
-            $qs = "?view=partie";
-        }else $qs = "?view=jouer";
+            $qs = "?view=partie&idPartie=$idPartie";
+            $_SESSION["idPartie"] = $idPartie;
+    }else $qs = "?view=jouer";
     break;
 }
 
