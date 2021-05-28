@@ -47,7 +47,7 @@ switch($action){
         $qs = "?view=partie";
         }
         else{
-            $qs = "?view=jouer";
+            $qs = "?view=jouer&idpartie=$id";
         }
         break;
         
