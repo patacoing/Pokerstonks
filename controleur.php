@@ -42,19 +42,23 @@ switch($action){
         if($cave = valider("cave","GET"))
         {
         $id = creerPartie($nbjoueur,$temps,$cave);
-        $infoUser = infoUser($pseudo);
-        creerhistorique($infoUser["iduser"],$id);
-        $qs = "?view=partie";
+        creerhistorique($_SESSION["idUser"],$id);
+        $qs = "?view=partie&idPartie=$id";
+        $_SESSION["idPartie"] = $id;
         }
         else{
             $qs = "?view=jouer&idpartie=$id";
         }
         break;
         
-
-    
-
-    
+    case "Rejoindre":
+        if($pseudo = valider("pseudo","SESSION"))
+        if($idPartie = valider("idPartie")){
+            addJoueurPartie($idPartie,$_SESSION["idUser"]);
+            $qs = "?view=partie&idPartie=$idPartie";
+            $_SESSION["idPartie"] = $idPartie;
+    }else $qs = "?view=jouer";
+    break;
 }
 
 
@@ -62,7 +66,7 @@ switch($action){
 if($flag){
     $info = infoUser($pseudo);
     $_SESSION['pseudo'] = $info['pseudo'];
-    $_SESSION['idPseudo'] = $info['idUser'];
+    $_SESSION['idUser'] = $info['iduser'];
     $_SESSION['argent'] = $info['argent'];
     $_SESSION["heureConnexion"] = date("H:i:s");   
 }
