@@ -29,6 +29,9 @@ function creerPartie($nbpers,$temps,$cave){
     $sql = "INSERT INTO partie VALUES(0,'$nbpers','$temps',1,'$cave')";
     return SQLInsert($sql);
 }
-
+function creerhistorique($idUser,$idPartie){
+    $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
+    return SQLInsert($sql);
+}
 
 ?>
