@@ -16,7 +16,7 @@ switch($action){
             if(!inscription($pseudo,$mdp)) $qs = "?view=inscription&msg=Ce pseudo est déjà utilisé !";
             else {
                 $flag = 1;
-                $qs = "?view=compte";
+                $qs = "?view=jouer";
             }
         }else $qs = "?view=accueil";
     break;
@@ -26,7 +26,7 @@ switch($action){
             if(!count(connexion($pseudo,$mdp))) $qs = "?view=connexion&msg=Le mot de passe ou le pseudo n est pas bon !";
             else{
                 $flag = 1;                
-                $qs = "?view=compte";
+                $qs = "?view=jouer";
             }
         }else $qs = "?view=accueil";
     break;
@@ -34,6 +34,24 @@ switch($action){
         session_destroy();
         $qs = "?view=accueil";
     break;
+    
+    case "Créer":
+        if($pseudo = valider("pseudo","SESSION"))
+        if($nbjoueur = valider("nbjoueur","GET"))
+        if($temps = valider("temps","GET"))
+        if($cave = valider("cave","GET"))
+        {
+        $id = creerPartie($nbjoueur,$temps,$cave);
+        $infoUser = infoUser($pseudo);
+        creerhistorique($infoUser["iduser"],$id);
+        $qs = "?view=partie";
+        }
+        else{
+            $qs = "?view=jouer";
+        }
+        break;
+        
+
     
 
     

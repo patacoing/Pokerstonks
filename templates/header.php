@@ -27,7 +27,7 @@ $pseudo = valider("pseudo","SESSION");
         <?php
         }else {?>
             <li class="nav-item">
-                <a class="nav-link" href="index.php?view=compte" style="margin-right:20px">Compte</a>
+                <a class="nav-link" href="index.php?view=jouer" style="margin-right:20px">Jouer</a>
             </li>
             <?php }?>
       </ul>
