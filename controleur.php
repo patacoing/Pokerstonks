@@ -47,7 +47,7 @@ switch($action){
         $_SESSION["idPartie"] = $id;
         }
         else{
-            $qs = "?view=jouer";
+            $qs = "?view=jouer&idpartie=$id";
         }
         break;
         
