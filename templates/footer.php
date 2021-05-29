@@ -14,10 +14,15 @@ $pseudo = valider("pseudo","SESSION");
     </div>
     <div class="row align-items-center" style="margin-top:10px">
         
-        <form action="controleur.php" method="GET">
+        <form action="controleur.php">
         <?php if($pseudo){?>
             <input type="submit" name="action" class="btn btn-danger" value="Deconnexion"/>
             <?php }?>
+        </form>
+        <form action="controleur.php">
+        <?php if(valider("idPartie","COOKIE")&&$pseudo){?>
+            <input type=submit name="action" class="btn btn-danger" value="Quitter"/>
+        <?php }?>
         </form>
        
     </div>

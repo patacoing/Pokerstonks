@@ -40,7 +40,6 @@ function creerhistorique($idUser,$idPartie){
     return SQLInsert($sql);
 }
 
-
 function userDansPartie($idUser){
     $sql = "SELECT * FROM historique WHERE idUser='$idUser'";
     return parcoursRs(SQLSelect($sql));
@@ -56,6 +55,27 @@ function addJoueurPartie($idPartie,$idUser){
 function listeUserDansPartie($idPartie){
     $sql = "SELECT user.idUser,user.pseudo,user.argent FROM user,historique WHERE historique.idPartie='$idPartie' AND user.iduser=historique.idUser";
     return parcoursRs(SQLSelect($sql));
+}
+
+function quitterLaPartie($idPartie,$idUser){
+    /*
+    problème avec nextjoueur ?
+    */
+    $sql = "DELETE FROM historique WHERE idUser=$idUser AND idPartie=$idPartie;";
+    $sql .= "DELETE FROM joueurPaire WHERE idUser=$idUser;";
+    $sql .= "DELETE FROM role WHERE iduser=$idUser";
+    SQLDelete($sql);
+    $sql = "UPDATE partie SET nbJoueurs=nbJoueurs-1 WHERE idPartie=$idPartie";
+    //si la partie est vide ==> on la supprime
+    if(!(nbJoueursDansPartie($idPartie)-1)){
+        $sql = "DELETE FROM partie WHERE idPartie=$idPartie";
+        return SQLDelete($sql);
+    }else return SQLUpdate($sql);
+}
+
+function nbJoueursDansPartie($idPartie) {
+    $sql = "SELECT nbJoueurs FROM partie WHERE idPartie=$idPartie";
+    return SQLGetChamp($sql);
 }
 
 ?>

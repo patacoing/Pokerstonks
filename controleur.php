@@ -44,7 +44,7 @@ switch($action){
         $id = creerPartie($nbjoueur,$temps,$cave);
         creerhistorique($_SESSION["idUser"],$id);
         $qs = "?view=partie&idPartie=$id";
-        $_SESSION["idPartie"] = $id;
+        setcookie("idPartie",$id,time()+3600*24*30);
         }
         else{
             $qs = "?view=jouer&idpartie=$id";
@@ -56,9 +56,16 @@ switch($action){
         if($idPartie = valider("idPartie")){
             addJoueurPartie($idPartie,$_SESSION["idUser"]);
             $qs = "?view=partie&idPartie=$idPartie";
-            $_SESSION["idPartie"] = $idPartie;
+            setcookie("idPartie",$idPartie,time()+3600*24*30);
     }else $qs = "?view=jouer";
     break;
+    case "Quitter":
+        if($pseudo = valider("pseudo","SESSION"))
+        if($idPartie = valider("idPartie","COOKIE")){
+            quitterLaPartie($idPartie,$_SESSION['idUser']);
+            setcookie("idPartie",$idPartie,time()-3600);
+            $qs = "?view=jouer";
+        }else $qs = "?view=accueil";
 }
 
 
