@@ -58,5 +58,6 @@ for($i=0;$i<count($parties);$i++){
     <input type="submit" name="action" value="Créer"> 
 </form>
 <?php
-    }
+    }else header("Location:index.php?view=partie&idPartie=".$idPartie);;
+    
 ?>
