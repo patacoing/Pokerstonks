@@ -63,7 +63,7 @@ function quitterLaPartie($idPartie,$idUser){
     */
     $sql = "DELETE FROM historique WHERE idUser=$idUser AND idPartie=$idPartie;";
     $sql .= "DELETE FROM joueurPaire WHERE idUser=$idUser;";
-    $sql .= "DELETE FROM role WHERE iduser=$idUser";
+    $sql .= "DELETE FROM 'role' WHERE iduser=$idUser";
     SQLDelete($sql);
     $sql = "UPDATE partie SET nbJoueurs=nbJoueurs-1 WHERE idPartie=$idPartie";
     //si la partie est vide ==> on la supprime
