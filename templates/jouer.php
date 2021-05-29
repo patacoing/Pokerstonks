@@ -58,4 +58,5 @@ for($i=0;$i<count($parties);$i++){
 </form>
 <?php
     }else echo "<br>Vous êtes déjà dans une partie !";
+
 ?>
