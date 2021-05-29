@@ -7,12 +7,13 @@ var nbj = 3 ;//symbolique
 var size = 100; //largeur du rect
 
 var depart = 50;
-var taille = 1400;
+var taille = window.innerWidth-2*depart;
 var rajout = (taille)/nbj;
 var distance =   depart + (rajout - size)/2;
 
 function init(){
     c = document.getElementById("myCanvas");
+    c.width = window.innerWidth-2;
     ctx = c.getContext("2d");
     draw();
 }
