@@ -12,6 +12,6 @@ $joueursDansPartie = listeUserDansPartie($idPartie);
 tprint($joueursDansPartie);
 ?>
 
-<script type="text/javascript" src="javascript/main.js"> 
-<canvas id="myCanvas" width="200" height="100" style="border:1px solid #d3d3d3;"> </canvas>
 
+<canvas id="myCanvas" width="1530" height="500" style="border:1px solid black;"> </canvas>
+<script type="text/javascript" src="javascript/main.js"> 
