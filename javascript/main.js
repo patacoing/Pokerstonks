@@ -7,13 +7,15 @@ var ctx;
 function init(){
     c = document.getElementById("myCanvas");
     ctx = c.getContext("2d");
+    draw();
 }
 function draw(){
     nbj = 3;//symbolique
-    for(let i =0;i < nbj ;i++){
-        ctx.beginPath();
-        ctx.rect(50,50,30,30);
-        ctx.fillStyle = "red";
+    ctx.beginPath();
+
+    ctx.fillStyle = "red";
+    ctx.fillRect(10, 10, 50, 50);
+        
         ctx.stroke();
-    }
+    
 }
