@@ -8,7 +8,7 @@ if(!$pseudo) header("Location:index.php?view=accueil");
 
 <?php
     $maPartie = userDansPartie($_SESSION['idUser']);
-    if($idPartie = valider("idPartie","SESSION")) header("Location:index.php?view=partie&idPartie=".$idPartie);
+    if($idPartie = valider("idPartie","COOKIE")) header("Location:index.php?view=partie&idPartie=".$idPartie);
     if(!count($maPartie)){
 ?>
 <h2>Rejoindre une partie</h2>

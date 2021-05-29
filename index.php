@@ -27,26 +27,6 @@ switch($view){
 }
 include("templates/footer.php");
 ?>
-<input type="hidden" id="idUser" value=<?php if($idUser = valider("idUser","SESSION")) echo "\"$idUser\"";?>/>
-<input type="hidden" id="idPartie" value=<?php if($idPartie = valider("idPartie","SESSION")) echo "\"$idPartie\""; ?>/>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </body>
-
-<script type="text/javascript">
-    window.addEventListener("beforeunload",fermeture());
-    function fermeture(){
-        var idUser = document.getElementById("idUser").value;
-        var idPartie = document.getElementById("idPartie").value;
-        if(idUser!="" && idPartie!=""){
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
-                }
-            };
-            xhttp.open("GET", "ajax/deconnexion.php?idUser="+idUser+"&idPartie="+idPartie, true);
-            xhttp.send();
-        }
-    }
-</script>
 </html>

@@ -31,9 +31,6 @@ switch($action){
         }else $qs = "?view=accueil";
     break;
     case "Deconnexion":
-        if($idPartie = valider("idPartie","SESSION")){
-            quitterLaPartie($idPartie,$_SESSION['idUser']);
-        }
         session_destroy();
         $qs = "?view=accueil";
     break;
@@ -44,14 +41,13 @@ switch($action){
         if($temps = valider("temps","GET"))
         if($cave = valider("cave","GET"))
         {
-        $idPartie = creerPartie($nbjoueur,$temps,$cave);
-        creerhistorique($_SESSION["idUser"],$idPartie);
-        $_SESSION["idPartie"] = $idPartie;
-        $qs = "?view=partie&idPartie=$idPartie";
-        //setcookie("idPartie",$id,time()+3600*24*30);
+        $id = creerPartie($nbjoueur,$temps,$cave);
+        creerhistorique($_SESSION["idUser"],$id);
+        $qs = "?view=partie&idPartie=$id";
+        setcookie("idPartie",$id,time()+3600*24*30);
         }
         else{
-            $qs = "?view=jouer";
+            $qs = "?view=jouer&idpartie=$id";
         }
         break;
         
@@ -60,16 +56,14 @@ switch($action){
         if($idPartie = valider("idPartie")){
             addJoueurPartie($idPartie,$_SESSION["idUser"]);
             $qs = "?view=partie&idPartie=$idPartie";
-            $_SESSION["idPartie"] = $idPartie;
-            //setcookie("idPartie",$idPartie,time()+3600*24*30);
+            setcookie("idPartie",$idPartie,time()+3600*24*30);
     }else $qs = "?view=jouer";
     break;
     case "Quitter":
         if($pseudo = valider("pseudo","SESSION"))
-        if($idPartie = valider("idPartie","SESSION")){
+        if($idPartie = valider("idPartie","COOKIE")){
             quitterLaPartie($idPartie,$_SESSION['idUser']);
-            //setcookie("idPartie",$idPartie,time()-3600);
-            unset($_SESSION['idPartie']);
+            setcookie("idPartie",$idPartie,time()-3600);
             $qs = "?view=jouer";
         }else $qs = "?view=accueil";
 }

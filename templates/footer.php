@@ -20,11 +20,10 @@ $pseudo = valider("pseudo","SESSION");
             <?php }?>
         </form>
         <form action="controleur.php">
-        <?php if(valider("idPartie","SESSION")&&$pseudo){?>
+        <?php if(valider("idPartie","COOKIE")&&$pseudo){?>
             <input type=submit name="action" class="btn btn-danger" value="Quitter"/>
         <?php }?>
         </form>
-        <?php tprint($_SESSION); ?>
        
     </div>
 </div>
