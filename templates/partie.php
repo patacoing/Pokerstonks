@@ -14,4 +14,6 @@ tprint($joueursDansPartie);
 
 
 <canvas id="myCanvas" width="1500" height="500" style="border:1px solid black;"> </canvas>
-<script type="text/javascript" src="javascript/main.js"> 
+<script type="text/javascript" src="javascript/carte.js"> </script>
+<script type="text/javascript" src="javascript/main.js"> </script>
+
