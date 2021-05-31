@@ -7,6 +7,7 @@ else{
 $idPartie = valider("idPartie");
 echo "<input id='idPartie' type='hidden' value='$idPartie'/>";
 
+echo "<input id='pseudo' type='hidden' value='$pseudo' />";
 
 $joueursDansPartie = listeUserDansPartie($idPartie);
 

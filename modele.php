@@ -43,10 +43,19 @@ function creerManche($idPartie){
     $sql = "INSERT INTO manche VALUES(0,'$idPartie','0') ";
     return SQLInsert($sql);
 }
+function creerTable($idmanche,$carte1,$carte2,$carte3,$carte4,$carte5){
+    $sql = "INSERT INTO tableJeu VALUES(0,'$idmanche','$carte1','$carte2','$carte3','$carte4','$carte5',0) ";
+    return SQLInsert($sql);
+}
+function idManche($idPartie){
+    $sql = "SELECT m.idmanche FROM manche m, partie p WHERE m.idPartie = p.idPartie AND m.termine = 0" ;
+    return SQLGetChamp($sql);  
+}
 function creerRole($idUser,$role,$idmanche){
     $sql = "INSERT INTO role VALUES(0,'$idUser','$role',$idmanche,0,NULL) ";
     return SQLInsert($sql);
 }
+
 function userDansPartie($idUser){
     $sql = "SELECT * FROM historique WHERE idUser='$idUser'";
     return parcoursRs(SQLSelect($sql));

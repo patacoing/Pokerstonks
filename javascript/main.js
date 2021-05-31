@@ -22,6 +22,7 @@ function init(){
     genPlateau();
     genPerso();
     idPartie = document.getElementById("idPartie").value;
+    pseudo = document.getElementById("pseudo").value;
     recupRole(idPartie);
     setTimeout(checkRole,1000);
     recupRole(idPartie,"recupRole.php");
@@ -31,10 +32,15 @@ function init(){
     
 }
 function checkRole(){
-    console.log(tableau)
-    if(tableau.role){
-        genPlateau();
-        Distribution();
+    var ret = -1;
+    for(let i = 0; i < role.length;i++){
+        if(role[i].pseudo  == pseudo && role[i].role == 1)
+        {
+            ret = i;
+        }
+    }
+    if(ret != -1){
+        creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
     }
     else
     {
@@ -108,6 +114,7 @@ function recupRole(idPartie,fichier){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            console.log(this.response)
             this.responseType = JSON;
             switch (fichier){
                 case "recupRole.php":
@@ -122,5 +129,15 @@ function recupRole(idPartie,fichier){
         }
     };
     xhttp.open("GET", "ajax/"+fichier+"?idPartie="+idPartie, true);
+    xhttp.send();
+}
+function creerTable(idPartie,c1,c2,c3,c4,c5){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            return;
+        }
+    };
+    xhttp.open("GET", "ajax/creerTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, true);
     xhttp.send();
 }
