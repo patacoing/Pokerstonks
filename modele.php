@@ -97,7 +97,7 @@ function nbJoueursDansPartie($idPartie) {
 }
 
 function recupTable($idPartie){
-    $sql = "SELECT partie.idPartie,partie.cavemin,partie.cavemin,tableJeu.carte1,tableJeu.carte2,tableJeu.carte3,tableJeu.carte4,tableJeu.carte5,tableJeu.pot
+    $sql = "SELECT partie.idPartie,partie.cavemin,partie.cavemin,tableJeu.carte1,tableJeu.carte2,tableJeu.carte3,tableJeu.carte4,tableJeu.carte5,tableJeu.pot, partie.nbJoueurs
             FROM tableJeu,manche,partie
             WHERE tableJeu.idmanche=manche.idmanche
             AND partie.idPartie=manche.idPartie

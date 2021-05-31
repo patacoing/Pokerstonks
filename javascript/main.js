@@ -23,12 +23,21 @@ function init(){
     genPerso();
     idPartie = document.getElementById("idPartie").value;
     recupRole(idPartie);
-    setTimeout(checkRole(tableau),10);
+    setTimeout(checkRole,1000);
     
     
 }
-function checkRole(tableau){
+function checkRole(){
     console.log(tableau)
+    if(tableau.role){
+        genPlateau();
+        Distribution();
+    }
+    else
+    {
+        //TO DO fonction envoyer
+
+    }
 }
 
 function genPlateau()
@@ -64,7 +73,6 @@ function drawJoueur(axeY){
     }
     
 }
-
 
 function genPerso()
 {
