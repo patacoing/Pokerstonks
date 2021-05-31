@@ -39,14 +39,7 @@ function creerhistorique($idUser,$idPartie){
     $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
     return SQLInsert($sql);
 }
-function creerManche($idPartie){
-    $sql = "INSERT INTO manche VALUES(0,'$idPartie','0') ";
-    return SQLInsert($sql);
-}
-function creerRole($idUser,$role,$idmanche){
-    $sql = "INSERT INTO role VALUES(0,'$idUser','$role',$idmanche,0,NULL) ";
-    return SQLInsert($sql);
-}
+
 function userDansPartie($idUser){
     $sql = "SELECT * FROM historique WHERE idUser='$idUser'";
     return parcoursRs(SQLSelect($sql));
@@ -68,27 +61,16 @@ function quitterLaPartie($idPartie,$idUser){
     /*
     problème avec nextjoueur ?
     */
+    $sql = "DELETE FROM historique WHERE idUser=$idUser AND idPartie='$idPartie';";
+    $sql .= "DELETE FROM joueurPaire WHERE idUser='$idUser';";
+    $sql .= "DELETE FROM role WHERE iduser=$idUser";
+    SQLDelete($sql);
+    $sql = "UPDATE partie SET nbJoueurs=nbJoueurs-1 WHERE idPartie='$idPartie'";
     //si la partie est vide ==> on la supprime
     if(!(nbJoueursDansPartie($idPartie)-1)){
-        $sql = "DELETE FROM historique WHERE idUser=$idUser AND idPartie='$idPartie';";
-        $sql .= "DELETE FROM coup WHERE idUser=$idUser;";
-        $sql .= "DELETE FROM tour WHERE idmanche = (SELECT m.idmanche FROM manche m , partie p WHERE m.idPartie = $idPartie);";
-        $sql .= "DELETE FROM joueurPaire WHERE idUser='$idUser';";
-        $sql .= "DELETE FROM role WHERE iduser=$idUser;";
-        $sql .= "DELETE FROM tableJeu WHERE idmanche = (SELECT m.idmanche FROM manche m , partie p WHERE m.idPartie = $idPartie);";
-        $sql .= "DELETE FROM manche WHERE idPartie=$idPartie;";
-        SQLDelete($sql);
-        $sql = "DELETE FROM partie WHERE idPartie=$idPartie;";
+        $sql = "DELETE FROM partie WHERE idPartie=$idPartie";
         return SQLDelete($sql);
-    }
-    else {
-        $sql = "UPDATE partie SET nbJoueurs=nbJoueurs-1 WHERE idPartie='$idPartie';";
-        $sql .= "DELETE FROM historique WHERE idUser=$idUser AND idPartie='$idPartie';";   
-        $sql .= "DELETE FROM coup WHERE idUser=$idUser;";
-        $sql .= "DELETE FROM joueurPaire WHERE idUser='$idUser';";
-        $sql .= "DELETE FROM role WHERE iduser=$idUser;";
-        return SQLDelete($sql);
-    }
+    }else return SQLUpdate($sql);
 }
 
 function nbJoueursDansPartie($idPartie) {

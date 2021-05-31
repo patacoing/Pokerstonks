@@ -9,6 +9,8 @@ var size = 100; //largeur du rect
 var pot =0;
 var carteManche = []; //retient les 5 cartes générées
 var miseJoueurAvant = 10;
+var role;
+var table;
 
 //info sur le joueur :
 var argent  =5;

@@ -5,7 +5,7 @@ else{
     if(valider("idPartie")!= valider("idPartie","COOKIE")) header("Location:index.php?view=accueil");
 }
 $idPartie = valider("idPartie");
-
+echo "<input id='idPartie' type='hidden' value='$idPartie'/>";
 
 
 $joueursDansPartie = listeUserDansPartie($idPartie);

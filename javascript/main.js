@@ -83,21 +83,27 @@ function drawCarte(axeY,indice,dist){
 }
 
 
-var idPartie = 3;
-var tableau;
-recupRole(idPartie);
+var idPartie = document.getElementById("idPartie").value;
+recup(idPartie,"recupRole.php");
+recup(idPartie,"recupTable.php");
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
-setTimeout(function(){console.log(tableau);},0);
+setTimeout(function(){console.log(role,table);},100);
 
-function recupRole(idPartie){
+function recup(idPartie,fichier){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             this.responseType = JSON;
-
-            tableau = this.response;
+            switch(fichier){
+                case "recupRole.php":
+                    role = this.response
+                break;
+                case "recupTable.php":
+                    table = this.response
+                break;
+            }
         }
     };
-    xhttp.open("GET", "ajax/recupRole.php?idPartie="+idPartie, true);
+    xhttp.open("GET", "ajax/"+fichier+"?idPartie="+idPartie, true); 
     xhttp.send();
 }
