@@ -12,7 +12,7 @@ var miseJoueurAvant = 10;
 var role;
 var table;
 var idPartie;
-var tableau;
+//var tableau;
 //info sur le joueur :
 var argent  =5;
 var couche = 0; //si vaut 1 ==> mettre les boutons d'actions en disabled

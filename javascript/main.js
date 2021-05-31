@@ -24,6 +24,9 @@ function init(){
     idPartie = document.getElementById("idPartie").value;
     recupRole(idPartie);
     setTimeout(checkRole,1000);
+    recupRole(idPartie,"recupRole.php");
+    recupRole(idPartie,"recupTable.php");
+    setTimeout(checkRole,100);
     
     
 }
@@ -38,6 +41,8 @@ function checkRole(){
         //TO DO fonction envoyer
 
     }
+    console.log(table.idPartie);
+    console.log(role);
 }
 
 function genPlateau()
@@ -99,15 +104,23 @@ function drawCarte(axeY,indice,dist){
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
 
 
-function recupRole(idPartie){
+function recupRole(idPartie,fichier){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             this.responseType = JSON;
-
-            tableau = this.response;
+            switch (fichier){
+                case "recupRole.php":
+                    role = JSON.parse(this.response);    
+                break;
+                case "recupTable.php":
+                    table = JSON.parse(this.response);
+                break;
+            }
+            
+            return;
         }
     };
-    xhttp.open("GET", "ajax/recupRole.php?idPartie="+idPartie, true);
+    xhttp.open("GET", "ajax/"+fichier+"?idPartie="+idPartie, true);
     xhttp.send();
 }
