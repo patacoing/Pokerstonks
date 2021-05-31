@@ -10,13 +10,13 @@ var size = 100; //largeur du rect
 //--------------------------Récupéré vià ajax--------------------------------------
 //info sur partie :
 var pot =0;
-var carteManche = new Array(); //retient les 5 cartes générées
+var carteManche = []; //retient les 5 cartes générées
 var miseJoueurAvant = 10;
 
 //info sur le joueur :
 var argent  =5;
 var couche = 0; //si vaut 1 ==> mettre les boutons d'actions en disabled
-var carteJoueur = new Array();
+var carteJoueur = [];
 var deltaMise = 0;
 var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons 
 //----------------------------------------------------------------------------------
@@ -28,11 +28,8 @@ var taille = window.innerWidth-2*depart;
 var rajout = (taille)/nbj;
 var rajoutPlateau = taille/5;
 var rajoutPerso = taille/2;
-var tab = new Array();
-var tabbis = new Array();
-var image = new Array();
-
-
+var tab = [];
+var image = [];
 var tailleX = 135*0.75;
 var tailleY = 196*0.75;
 var Distrib = true;
