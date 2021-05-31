@@ -10,6 +10,10 @@
 .bg-dark{
     background-color: black !important;
 }
+body{
+    background-color:black;
+    overflow-x:hidden;
+}
 #slogan{
     text-align: center;
     position: relative;

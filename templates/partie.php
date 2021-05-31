@@ -5,14 +5,14 @@ else{
     if(valider("idPartie")!= valider("idPartie","COOKIE")) header("Location:index.php?view=accueil");
 }
 $idPartie = valider("idPartie");
-echo "id de la partie : $idPartie";
+
 
 
 $joueursDansPartie = listeUserDansPartie($idPartie);
-tprint($joueursDansPartie);
+
 ?>
 <div id="conteneur" style="background-color:black" >
-    <canvas id="myCanvas" width="1500" height="700" ></canvas>
+    <canvas id="myCanvas" width="1200" height="600" style="margin:0px" ></canvas>
     <div id="bts" style="background-color:green;text-align:center;">
     <input type="button" id="check" value="check" onclick="check()"/>
     <input type="button" id="fold" value="fold" onclick="fold()"/>

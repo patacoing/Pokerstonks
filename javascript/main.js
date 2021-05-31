@@ -12,21 +12,25 @@ for(let i = 0; i < 52;i++)
 
 function init(){
     c = document.getElementById("myCanvas");
-    c.width = window.innerWidth-20;
+    c.width = window.innerWidth;
+
     ctx = c.getContext("2d");
+    rajout = (c.width)/nbj;
+    rajoutPlateau = c.width/5;
+    rajoutPerso = c.width/2;
     drawJoueur(10);
     genPlateau();
     genPerso();
- 
+    
 
 
     
 }
 function drawJoueur(axeY){
-    var dist =   depart + (rajout - size)/2;;
+    var dist =   (rajout - size)/2;;
     ctx.beginPath();
     ctx.fillStyle = "green";
-    ctx.fillRect(depart, axeY, taille, c.height);
+    ctx.fillRect(0, axeY,c.width, c.height);
     ctx.stroke();
     for(let i = 0; i < nbj;i++)
     {
@@ -41,13 +45,13 @@ function drawJoueur(axeY){
 function genPlateau()
 {
     var alea;
-    var dist =   depart + (rajoutPlateau - size)/2;;
+    var dist = (rajoutPlateau - size)/2;;
     for(let i = 0; i < 5;i++)
     {
         alea = parseInt(Math.random()*tab.length);
         carteManche[i] = tab[alea];
         drawCarte(230,tab[alea],dist);
-        dist += taille/5;
+        dist += c.width/5;
         tab.splice(alea,1);
         
          
@@ -57,7 +61,7 @@ function genPlateau()
 function genPerso()
 {
     var alea;
-    var dist = depart + (rajoutPerso - size)/2;
+    var dist = (rajoutPerso - size)/2;
     for(let i = 0; i < 2;i++)
     {
         alea = parseInt(Math.random()*tab.length);
@@ -66,7 +70,7 @@ function genPerso()
         console.log(tab);
         tab.splice(alea,1);
     
-        dist += taille/2 ;
+        dist += c.width/2 ;
          
     }
 }

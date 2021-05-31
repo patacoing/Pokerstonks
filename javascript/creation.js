@@ -1,6 +1,6 @@
 var c;
 var ctx;
-var nbj = 3 ;//symbolique
+var nbj = 8 ;//symbolique
 var size = 100; //largeur du rect
 
 
@@ -19,10 +19,9 @@ var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons
 //----------------------------------------------------------------------------------
 
 var depart = 50;
-var taille = window.innerWidth-2*depart;
-var rajout = (taille)/nbj;
-var rajoutPlateau = taille/5;
-var rajoutPerso = taille/2;
+var rajout;
+var rajoutPlateau;
+var rajoutPerso;
 var tab = [];
 var image = [];
 var tailleX = 135*0.75;
