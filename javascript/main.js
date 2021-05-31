@@ -19,17 +19,23 @@ function init(){
     rajoutPlateau = c.width/5;
     rajoutPerso = c.width/2;
     drawJoueur(10);
-    genPlateau();
+
     //genPerso();
     idPartie = document.getElementById("idPartie").value;
     idUser = document.getElementById("idUser").value;
     pseudo = document.getElementById("pseudo").value;
     recupRole(idPartie,"recupRole.php");
-    recupRole(idPartie,"recupTable.php");
+    setTimeout(tempo,500);
+    
+    
+    //setTimeout(drawPlateau,1000);
+    
+}
+function tempo(){
     recupInfoUsers(idPartie);
-    setTimeout(checkRole,1000);
-    
-    
+    setTimeout(checkRole,500);
+    setTimeout(recupRole,500,idPartie,"recupTable.php");
+    setTimeout(drawPlateau,1500);
 }
 function checkRole(){
     var ret = -1;
@@ -40,6 +46,7 @@ function checkRole(){
         }
     }
     if(ret != -1){
+        genPlateau();
         creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
         if(usersInfo.length > 1)
         {
@@ -48,24 +55,28 @@ function checkRole(){
     }
     else
     {
-        recupPaire(idPartie,idUser);
-        setTimeout(function(){console.log(maPaire)},500);
+        setTimeout(recupPaire,500,idPartie,idUser);
+        
+    }
+}
+function drawPlateau(){
+    var dist = (rajout - size)/2;
+    for(var i = 0; i < 5;i++)
+    {
+        setTimeout(drawCarte,2000,230,table["carte"+i],dist);
+        dist +=c.width/5;
     }
 }
 
 function genPlateau()
 {
     var alea;
-    var dist = (rajoutPlateau - size)/2;;
     for(let i = 0; i < 5;i++)
     {
         alea = parseInt(Math.random()*tab.length);
         carteManche[i] = tab[alea];
-        drawCarte(230,tab[alea],dist);
-        dist += c.width/5;
         tab.splice(alea,1);
-        
-         
+              
     }
 }
 
@@ -126,6 +137,7 @@ function recupRole(idPartie,fichier){
                     role = JSON.parse(this.response);    
                 break;
                 case "recupTable.php":
+                    console.log(this.response);
                     table = JSON.parse(this.response);
                 break;
             }
