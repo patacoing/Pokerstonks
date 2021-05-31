@@ -10,6 +10,9 @@ var pot =0;
 var carteManche = []; //retient les 5 cartes générées
 var miseJoueurAvant = 10;
 var role;
+var usersInfo;
+var maPaire;
+var idUser;
 var table;
 var idPartie;
 var pseudo;
