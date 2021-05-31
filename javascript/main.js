@@ -1,45 +1,13 @@
 window.addEventListener("load",init);
 
 
-var c;
-var ctx;
-var nbj = 3 ;//symbolique
-var size = 100; //largeur du rect
 
 
-//--------------------------Récupéré vià ajax--------------------------------------
-//info sur partie :
-var pot =0;
-var carteManche = []; //retient les 5 cartes générées
-var miseJoueurAvant = 10;
-
-//info sur le joueur :
-var argent  =5;
-var couche = 0; //si vaut 1 ==> mettre les boutons d'actions en disabled
-var carteJoueur = [];
-var deltaMise = 0;
-var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons 
-//----------------------------------------------------------------------------------
-
-
-
-var depart = 50;
-var taille = window.innerWidth-2*depart;
-var rajout = (taille)/nbj;
-var rajoutPlateau = taille/5;
-var rajoutPerso = taille/2;
-var tab = [];
-var image = [];
-var tailleX = 135*0.75;
-var tailleY = 196*0.75;
-var Distrib = true;
 for(let i = 0; i < 52;i++)
 {
     image[i] = new Image();
     image[i].src = paquet[i].lien;
     tab[i] = i;
-
-
 }
 
 function init(){
@@ -109,71 +77,3 @@ function drawCarte(axeY,indice,dist){
         ctx.stroke();
         
 }
-<<<<<<< HEAD
-=======
-
-var idPartie = 21;
-var tableau;
-recupRole(idPartie);
-//il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
-setTimeout(function(){console.log(tableau);},0);
-
-function recupRole(idPartie){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            this.responseType = JSON;
-
-            tableau = this.response;
-        }
-    };
-    xhttp.open("GET", "ajax/recupRole.php?idPartie="+idPartie, true);
-    xhttp.send();
-}
-
-
-
-/*
-function check(){
-    //ne rien faire  : 
-    //seulement si la mise du joueur d'avant n'est pas plus grande que la mienne
-    if(miseJoueurAvant == mise){
-
-    }
-}
-
-function fold(){
-    //se coucher ==> tous nos boutons sont disabled jusqu'à la prochaine manche 
-    couche = 1;
-}
-
-function raise(){
-    //valider son choix de relance 
-    pot += deltaMise;
-    argent -= deltaMise;
-}
-
-function moitiePot(){
-    deltaMise = 1/2 * pot;
-    return;
-}
-
-function unPot(){
-    deltaMise = pot;
-    return;
-}
-
-function deuxPot(){
-    deltaMise = 2*pot;
-    return;
-}
-
-function call(){
-    //on met la même mise que le joueurs d'avant
-    deltaMise = (miseJoueurAvant - mise) 
-    mise += deltaMise;
-    pot += deltaMise;
-    argent -= mise;
-}
-*/
->>>>>>> origin/romain
