@@ -61,11 +61,11 @@ function quitterLaPartie($idPartie,$idUser){
     /*
     problème avec nextjoueur ?
     */
-    $sql = "DELETE FROM historique WHERE idUser=$idUser AND idPartie=$idPartie;";
-    $sql .= "DELETE FROM joueurPaire WHERE idUser=$idUser;";
+    $sql = "DELETE FROM historique WHERE idUser=$idUser AND idPartie='$idPartie';";
+    $sql .= "DELETE FROM joueurPaire WHERE idUser='$idUser';";
     $sql .= "DELETE FROM role WHERE iduser=$idUser";
     SQLDelete($sql);
-    $sql = "UPDATE partie SET nbJoueurs=nbJoueurs-1 WHERE idPartie=$idPartie";
+    $sql = "UPDATE partie SET nbJoueurs=nbJoueurs-1 WHERE idPartie='$idPartie'";
     //si la partie est vide ==> on la supprime
     if(!(nbJoueursDansPartie($idPartie)-1)){
         $sql = "DELETE FROM partie WHERE idPartie=$idPartie";
@@ -74,8 +74,29 @@ function quitterLaPartie($idPartie,$idUser){
 }
 
 function nbJoueursDansPartie($idPartie) {
-    $sql = "SELECT nbJoueurs FROM partie WHERE idPartie=$idPartie";
+    $sql = "SELECT nbJoueurs FROM partie WHERE idPartie='$idPartie'";
     return SQLGetChamp($sql);
+}
+
+function recupTable($idPartie){
+    $sql = "SELECT partie.idPartie,partie.cavemin,partie.cavemin,tableJeu.carte1,tableJeu.carte2,tableJeu.carte3,tableJeu.carte4,tableJeu.carte5,tableJeu.pot
+            FROM tableJeu,manche,partie
+            WHERE tableJeu.idmanche=manche.idmanche
+            AND partie.idPartie=manche.idPartie
+            AND manche.termine=0
+            AND partie.idPartie='$idPartie'";
+    return parcoursRs(SQLSelect($sql))[0];
+}
+
+function recupRole($idPartie){
+    $sql = "SELECT user.pseudo,role.role,role.statut 
+            FROM role,manche,partie,user 
+            WHERE partie.idPartie=manche.idPartie 
+            AND role.idmanche=manche.idmanche 
+            AND user.iduser=role.iduser 
+            AND manche.termine=0 
+            AND partie.idPartie='$idPartie'";
+    return parcoursRs(SQLSelect($sql));
 }
 
 ?>

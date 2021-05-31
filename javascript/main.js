@@ -109,3 +109,71 @@ function drawCarte(axeY,indice,dist){
         ctx.stroke();
         
 }
+<<<<<<< HEAD
+=======
+
+var idPartie = 21;
+var tableau;
+recupRole(idPartie);
+//il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
+setTimeout(function(){console.log(tableau);},0);
+
+function recupRole(idPartie){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            this.responseType = JSON;
+
+            tableau = this.response;
+        }
+    };
+    xhttp.open("GET", "ajax/recupRole.php?idPartie="+idPartie, true);
+    xhttp.send();
+}
+
+
+
+/*
+function check(){
+    //ne rien faire  : 
+    //seulement si la mise du joueur d'avant n'est pas plus grande que la mienne
+    if(miseJoueurAvant == mise){
+
+    }
+}
+
+function fold(){
+    //se coucher ==> tous nos boutons sont disabled jusqu'à la prochaine manche 
+    couche = 1;
+}
+
+function raise(){
+    //valider son choix de relance 
+    pot += deltaMise;
+    argent -= deltaMise;
+}
+
+function moitiePot(){
+    deltaMise = 1/2 * pot;
+    return;
+}
+
+function unPot(){
+    deltaMise = pot;
+    return;
+}
+
+function deuxPot(){
+    deltaMise = 2*pot;
+    return;
+}
+
+function call(){
+    //on met la même mise que le joueurs d'avant
+    deltaMise = (miseJoueurAvant - mise) 
+    mise += deltaMise;
+    pot += deltaMise;
+    argent -= mise;
+}
+*/
+>>>>>>> origin/romain
