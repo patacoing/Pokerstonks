@@ -26,7 +26,7 @@ function drawJoueur(axeY){
     var dist =   depart + (rajout - size)/2;;
     ctx.beginPath();
     ctx.fillStyle = "green";
-    ctx.fillRect(depart, axeY, taille, 800);
+    ctx.fillRect(depart, axeY, taille, c.height);
     ctx.stroke();
     for(let i = 0; i < nbj;i++)
     {

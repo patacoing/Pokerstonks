@@ -9,7 +9,7 @@ $msg = valider("msg","GET");
         <h1>Rejoignez-nous</h2>
         <h3>déjà plus de 100 millions de joueurs</h3>
     </div>
-    <div id="info" class="bg-dark">
+    <div id="info" class="bg-dark" style = "margin-top:100px;">
         <div class="row">
             <div class="col-6">
                 <div class="row">Des gains tous les jours</div>

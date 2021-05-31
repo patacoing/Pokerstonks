@@ -2,7 +2,7 @@
 include_once ("libs/maLibForms.php");
 $pseudo = valider("pseudo","SESSION");
 ?>
-<div class="container-fluid fixed-bottom p-2 bg-dark text-white">
+<div class="container-fluid  p-2 bg-dark text-white" style = "height:100px;">
     <div class="row h-50">
         <div class="col-auto">
             <?php if($pseudo) echo "Nom du compte : <strong>$pseudo</strong>";?>   
@@ -12,7 +12,7 @@ $pseudo = valider("pseudo","SESSION");
             <?php if($pseudo) echo "heure de connexion : ".$_SESSION['heureConnexion'];?>
         </div>
     </div>
-    <div class="row align-items-center" style="margin-top:10px">
+    <div class="row align-items-center" >
         
         <form action="controleur.php">
         <?php if($pseudo){?>
