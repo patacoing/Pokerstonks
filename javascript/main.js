@@ -29,8 +29,8 @@ function init(){
     
 }
 function checkRole(){
-    console.log("tableJeu :"+table);
-    console.log("role : "+role);
+    console.log(table.idPartie);
+    console.log(role);
 }
 
 function genPlateau()
@@ -100,10 +100,10 @@ function recupRole(idPartie,fichier){
             this.responseType = JSON;
             switch (fichier){
                 case "recupRole.php":
-                    role = this.response;    
+                    role = JSON.parse(this.response);    
                 break;
                 case "recupTable.php":
-                    table = this.response;
+                    table = JSON.parse(this.response);
                 break;
             }
             
