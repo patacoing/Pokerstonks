@@ -21,27 +21,16 @@ function init(){
     drawJoueur(10);
     genPlateau();
     genPerso();
+    idPartie = document.getElementById("idPartie").value;
+    recupRole(idPartie);
+    setTimeout(checkRole(tableau),10);
     
-
-
-    
-}
-function drawJoueur(axeY){
-    var dist =   (rajout - size)/2;;
-    ctx.beginPath();
-    ctx.fillStyle = "green";
-    ctx.fillRect(0, axeY,c.width, c.height);
-    ctx.stroke();
-    for(let i = 0; i < nbj;i++)
-    {
-        ctx.beginPath();
-        ctx.fillStyle = "red";
-        ctx.fillRect(dist, axeY, size, 200);
-        dist += rajout ;
-        ctx.stroke();       
-    }
     
 }
+function checkRole(tableau){
+    console.log(tableau)
+}
+
 function genPlateau()
 {
     var alea;
@@ -58,6 +47,25 @@ function genPlateau()
     }
 }
 
+
+function drawJoueur(axeY){
+    var dist =   (rajout - size)/2;;
+    ctx.beginPath();
+    ctx.fillStyle = "green";
+    ctx.fillRect(0, axeY,c.width, c.height);
+    ctx.stroke();
+    for(let i = 0; i < nbj;i++)
+    {
+        ctx.beginPath();
+        ctx.fillStyle = "red";
+        ctx.fillRect(dist, axeY, size, 200);
+        dist += rajout ;
+        ctx.stroke();       
+    }
+    
+}
+
+
 function genPerso()
 {
     var alea;
@@ -67,7 +75,6 @@ function genPerso()
         alea = parseInt(Math.random()*tab.length);
         carteJoueur[i] = tab[alea];
         drawCarte(400,tab[alea],dist);
-        console.log(tab);
         tab.splice(alea,1);
     
         dist += c.width/2 ;
@@ -75,35 +82,24 @@ function genPerso()
     }
 }
 function drawCarte(axeY,indice,dist){
-        console.log(indice);
         ctx.beginPath();
         ctx.drawImage(image[indice],dist,axeY,tailleX,tailleY);
         ctx.stroke();
         
 }
 
-
-var idPartie = document.getElementById("idPartie").value;
-recup(idPartie,"recupRole.php");
-recup(idPartie,"recupTable.php");
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
-setTimeout(function(){console.log(role,table);},100);
 
-function recup(idPartie,fichier){
+
+function recupRole(idPartie){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             this.responseType = JSON;
-            switch(fichier){
-                case "recupRole.php":
-                    role = this.response
-                break;
-                case "recupTable.php":
-                    table = this.response
-                break;
-            }
+
+            tableau = this.response;
         }
     };
-    xhttp.open("GET", "ajax/"+fichier+"?idPartie="+idPartie, true); 
+    xhttp.open("GET", "ajax/recupRole.php?idPartie="+idPartie, true);
     xhttp.send();
 }
