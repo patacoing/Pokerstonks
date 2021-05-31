@@ -112,24 +112,29 @@ function drawCarte(axeY,indice,dist){
         ctx.stroke();
         
 }
-/*
-function checkCarte(nb)
-{
-    for(var i = 0; i < tab.length; i++){
-        if(tab[i] == nb)
-        {
-            return false;
+
+var idPartie = 21;
+var tableau;
+recupRole(idPartie);
+//il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
+setTimeout(function(){console.log(tableau);},0);
+
+function recupRole(idPartie){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            this.responseType = JSON;
+
+            tableau = this.response;
         }
-    }
-    tab[i+1] = nb; //on enregistre
-    return true;
+    };
+    xhttp.open("GET", "ajax/recupRole.php?idPartie="+idPartie, true);
+    xhttp.send();
 }
 
 
 
-
-
-
+/*
 function check(){
     //ne rien faire  : 
     //seulement si la mise du joueur d'avant n'est pas plus grande que la mienne
