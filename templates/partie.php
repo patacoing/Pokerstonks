@@ -29,4 +29,6 @@ $joueursDansPartie = listeUserDansPartie($idPartie);
 <script type="text/javascript" src="javascript/creation.js"> </script>
 <script type="text/javascript" src="javascript/coup.js"> </script>
 <script type="text/javascript" src="javascript/main.js"> </script>
-
+<script type="text/javascript" src="javascript/requeteWait.js"> </script>
+<script type="text/javascript" src="javascript/ajax.js"> </script>
+<script type="text/javascript" src="javascript/draw.js"> </script>
