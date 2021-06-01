@@ -24,72 +24,58 @@ function init(){
     idPartie = document.getElementById("idPartie").value;
     idUser = document.getElementById("idUser").value;
     pseudo = document.getElementById("pseudo").value;
-
+    usersInfo = 6;
     recupInfoUsers(idPartie);
-    setTimeout(console.log,3000,usersInfo);
-    recupRole(idPartie,"recupRole.php");
-    setTimeout(checkRole,3000);
-    setTimeout(main,3000);
+    console.log(usersInfo,"js = merde");
+    recupRole(idPartie);
+    checkRole();
+    main();
     
 }
 function main(){
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
-    setTimeout(function(){
     if(usersInfo.length > nbj)
     {
         genRole();
     }
-    },1000)
     drawJoueur();
-    setTimeout(main,1200);
+    drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
+    requestAnimationFrame(main);
 }
 function checkRole(){
     
     nbj = usersInfo.length;
 
     monIndex = -1;
-    for(let i = 0; i < role.length;i++){
-        if(role[i].idUser  == idUser)
-        {
-            monIndex = i; //on trouve notre index dans role[]
-            break;
-        }
+    waitRole();
+
+    if(table == undefined && usersInfo.length==1){//lors de la création de la partie ou si il ne reste qu'un joueur
+    genPlateau(); //on génère tout
+    creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
+    recupTable(idPartie); //on récupère
+    waitJoueur(); //on distribue des cartes si qqun rejoinds
+    }
+    else if(table == undefined){
+        waitTable(); //si on a pas le bon rôle on attend
     }
     if(table == undefined && usersInfo.length >1 && role[monIndex].role == 1){//nouvelle manche
         genPlateau();
         creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
-        recupRole(idPartie,"recupTable.php");
+        recupTable(idPartie);
         distribCarte();   
-        drawPlateau(carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
-        console.log("table undefined & userInfo.length >1 & ret!=-1");     
+        drawPlateau(carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]); 
+        
     }
     else if(table != undefined && usersInfo.length >1){//récupérer sa paire
-        recupRole(idPartie,"recupTable.php");
         waitPaire();
-        setTimeout(function(){
-            console.log(maPaire);
-            genPerso(maPaire.carte1,maPaire.carte2);
-        },500);
-    }
-    else if(table == undefined && usersInfo.length==1){//lors de la création de la partie ou si il ne reste qu'un joueur
-        creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
-        waitJoueur();
-        //il est tout seul donc c'est forcément lui qui créé la table
-        //problème : après la fonction ==> table != undefined mais les paires ne sont pas créées
-        //
-        console.log("table undefined && usersInfo.length==1");
-    }
-    if(role[monIndex].role == undefined)
-    {
-        waitRole();
-        if(table == undefined){
-            waitTable();
-        }
+        drawPerso(maPaire.carte1,maPaire.carte2);
+        recupTable(idPartie);
         drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     }
- 
+
 }
+
 function genRole(){
     var bigblinde = -1;
     var ptiteblinde = -1;
@@ -121,7 +107,6 @@ function genPlateau()
     {
         alea = parseInt(Math.random()*tab.length);
         carteManche[i] = tab[alea];
-        drawCarte(230,tab[alea],dist);
         //il faut afficher les cartes de table sinon c'est aléatoire pour tous les joueurs
         
         tab.splice(alea,1);
@@ -141,7 +126,17 @@ function distribCarte(){
         creerPaire(idPartie,usersInfo[i].idUser,carteJoueur[0],carteJoueur[1]);
     }
 }
-
+function pretempo(){
+    facto(100);
+}
+function facto(n){
+    if(n == 0){
+        return 1;
+    }
+    else{
+        return n*facto(n-1);
+    }
+}
 
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
 

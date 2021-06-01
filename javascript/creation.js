@@ -2,14 +2,13 @@ var c;
 var ctx;
 var nbj;//symbolique
 var size = 100; //largeur du rect
-
+var d2;
 
 //--------------------------Récupéré vià ajax--------------------------------------
 //info sur partie :
 var pot =0;
 var carteManche = []; //retient les 5 cartes générées
 var miseJoueurAvant = 10;
-var role;
 var usersInfo;
 var maPaire;
 var idUser;
@@ -18,6 +17,7 @@ var idPartie;
 var pseudo;
 var monIndex;
 var role;
+
 //var tableau;
 //info sur le joueur :
 var argent  =5;
@@ -30,7 +30,7 @@ var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons
 var depart = 50;
 var rajout;
 var rajoutPlateau;
-var rajoutPerso;
+var rajoutPerso = 50;
 var tab = [];
 var image = [];
 var tailleX = 135*0.75;

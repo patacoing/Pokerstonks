@@ -11,25 +11,32 @@ function waitPaire(){
 function waitJoueur(){
     if(usersInfo.length > 1){
         distribCarte();
+        drawPerso(maPaire.carte1,maPaire.carte2); 
         
     }
     else{
         setTimeout(waitJoueur,1000);
     }  
 }
-function waitRole(){
-    if(role[monIndex] == undefined){
-        recupRole(idPartie,"recupRole.php");
+function waitTable(){
+    if(table == undefined){
+        recupTable(idPartie);
     }
     else{
-        setTimeout(waitRole,1000);
+        setTimeout(waitTable,100);
     }
 }
-function waitTable(){
-    if(role[monIndex] == undefined){
-        recupRole(idPartie,"recupTable.php");
+function waitRole(){
+    monIndex = -1
+    for(let i = 0; i < role.length;i++){
+        if(role[i].idUser  == idUser)
+        {
+            monIndex = i; //on trouve notre index dans role[]
+            break;
+        }
     }
-    else{
-        setTimeoutTimeout(waitTable,1000);
+    if(monIndex = -1){
+        recupRole(idPartie);
+        setTimeout(waitRole,100);
     }
 }
