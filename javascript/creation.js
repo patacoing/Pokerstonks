@@ -16,6 +16,8 @@ var idUser;
 var table;
 var idPartie;
 var pseudo;
+var monIndex;
+var role;
 //var tableau;
 //info sur le joueur :
 var argent  =5;
