@@ -114,7 +114,7 @@ function recupTable($idPartie){
     return parcoursRs(SQLSelect($sql))[0];
 }
 function recupRole($idPartie){
-    $sql = "SELECT user.pseudo,role.role,role.statut
+    $sql = "SELECT user.idUser,role.role,role.statut
             FROM role,manche,partie,user 
             WHERE partie.idPartie=manche.idPartie 
             AND role.idmanche=manche.idmanche 

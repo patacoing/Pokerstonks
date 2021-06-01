@@ -50,7 +50,7 @@ function checkRole(){
 
     monIndex = -1;
     for(let i = 0; i < role.length;i++){
-        if(role[i].pseudo  == pseudo)
+        if(role[i].idUser  == idUser)
         {
             monIndex = i; //on trouve notre index dans role[]
             break;
