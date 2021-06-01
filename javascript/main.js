@@ -13,44 +13,57 @@ for(let i = 0; i < 52;i++)
 function init(){
     c = document.getElementById("myCanvas");
     c.width = window.innerWidth;
-
     ctx = c.getContext("2d");
     rajout = (c.width)/nbj;
     rajoutPlateau = c.width/5;
     rajoutPerso = c.width/2;
-    drawJoueur(10);
+    
     genPlateau();
+    
     //genPerso();
     idPartie = document.getElementById("idPartie").value;
     idUser = document.getElementById("idUser").value;
     pseudo = document.getElementById("pseudo").value;
     recupRole(idPartie,"recupRole.php");
     recupRole(idPartie,"recupTable.php");
+    setTimeout(function(){console.log(table)},200);
+    setTimeout(recupInfoUsers,500,idPartie);
     recupInfoUsers(idPartie);
     setTimeout(checkRole,1000);
     
     
 }
 function checkRole(){
+    nbj = usersInfo.length;
+    drawJoueur(10);
     var ret = -1;
     for(let i = 0; i < role.length;i++){
         if(role[i].pseudo  == pseudo && role[i].role == 1)
         {
-            ret = i;
+            ret = i; //on trouve notre index dans role[]
         }
     }
-    if(ret != -1){
+    if(table == undefined && usersInfo.length >1 && ret!=-1){//nouvelle manche
         creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
-        if(usersInfo.length > 1)
-        {
-            distribCarte();
-        }
+        distribCarte();   
+        console.log("table undefined & userInfo.length >1 & ret!=-1");     
     }
-    else
-    {
+    else if(table != undefined && usersInfo.length >1){//récupérer sa paire
         recupPaire(idPartie,idUser);
-        setTimeout(function(){console.log(maPaire)},500);
+        setTimeout(function(){
+            console.log(maPaire);
+            genPerso(maPaire.carte1,maPaire.carte2);
+            console.log("table !=undefined && usersInfo.length >1");
+        },500);
     }
+    else if(table == undefined && usersInfo.length==1){//lors de la création de la partie ou si il ne reste qu'un joueur
+        creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
+        //il est tout seul donc c'est forcément lui qui créé la table
+        //problème : après la fonction ==> table != undefined mais les paires ne sont pas créées
+        //
+        console.log("table undefined && usersInfo.length==1");
+    }
+ 
 }
 
 function genPlateau()
@@ -62,6 +75,7 @@ function genPlateau()
         alea = parseInt(Math.random()*tab.length);
         carteManche[i] = tab[alea];
         drawCarte(230,tab[alea],dist);
+        //il faut afficher les cartes de table sinon c'est aléatoire pour tous les joueurs
         dist += c.width/5;
         tab.splice(alea,1);
         

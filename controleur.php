@@ -44,6 +44,7 @@ switch($action){
         $id = creerPartie($nbjoueur,$temps,$cave);
         creerhistorique($_SESSION["idUser"],$id);
         $idmanche = creerManche($id);
+        echo $idmanche;
         creerRole($_SESSION["idUser"],1,$idmanche);
         $qs = "?view=partie&idPartie=$id";
         setcookie("idPartie",$id,time()+3600*24*30);

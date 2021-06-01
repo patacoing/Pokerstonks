@@ -1,6 +1,6 @@
 <?php
 include_once "libs/maLibSQL.pdo.php";
-
+//--------Fonction inscription/connexion--------
 function inscription($pseudo,$mdp){
     $mdp = md5($mdp);
     if(!pseudoPresent($pseudo)){
@@ -8,66 +8,17 @@ function inscription($pseudo,$mdp){
         return SQLInsert($sql);
     }else return 0;
 }
-
 function pseudoPresent($pseudo){
     $sql = "SELECT pseudo FROM user WHERE pseudo LIKE '$pseudo'";
     return SQLGetChamp($sql);
 }
-
 function connexion($pseudo,$mdp){
     $mdp = md5($mdp);
     $sql  = "SELECT pseudo FROM user WHERE pseudo='$pseudo' AND mdp='$mdp'";
     return parcoursRs(SQLSelect($sql));
 }
 
-function infoUser($pseudo,$idUser=-1){
-    $sql = "SELECT * FROM user WHERE (pseudo='$pseudo')";
-    if($idUser != -1) $sql .= "OR (iduser='$idUser')";
-    return parcoursRs(SQLSelect($sql))[0];
-}
-
-function listerParties(){
-    $sql = "SELECT * FROM partie WHERE nbJoueurs<nbJoueurMax";
-    return parcoursRs(SQLSelect($sql));
-}
-
-function creerPartie($nbpers,$temps,$cave){
-    $sql = "INSERT INTO partie VALUES(0,'$nbpers','$temps',1,'$cave')";
-    return SQLInsert($sql);
-}
-function creerhistorique($idUser,$idPartie){
-    $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
-    return SQLInsert($sql);
-}
-function creerManche($idPartie){
-    $sql = "INSERT INTO manche VALUES(0,'$idPartie','0') ";
-    return SQLInsert($sql);
-}
-function creerTable($idmanche,$carte1,$carte2,$carte3,$carte4,$carte5){
-    $sql = "INSERT INTO tableJeu VALUES(0,'$idmanche','$carte1','$carte2','$carte3','$carte4','$carte5',0) ";
-    return SQLInsert($sql);
-}
-function creerPaire($idUser,$idmanche,$c1,$c2){
-    $sql = "INSERT INTO joueurPaire VALUES(0,'$idUser','$idmanche','$c1','$c2') ";
-    return SQLInsert($sql); 
-}
-function idManche($idPartie){
-    $sql = "SELECT m.idmanche FROM manche m, partie p WHERE m.idPartie = p.idPartie AND m.termine = 0" ;
-    return SQLGetChamp($sql);  
-}
-function creerRole($idUser,$role,$idmanche){
-    $sql = "INSERT INTO role VALUES(0,'$idUser','$role',$idmanche,0,NULL) ";
-    return SQLInsert($sql);
-}
-function recupPaire($idmanche,$idUser){
-    $sql="SELECT carte1,carte2 FROM joueurPaire WHERE idmanche = '$idmanche' AND idUser = '$idUser'";
-    return parcoursRs(SQLSELECT($sql))[0];
-}
-function userDansPartie($idUser){
-    $sql = "SELECT * FROM historique WHERE idUser='$idUser'";
-    return parcoursRs(SQLSelect($sql));
-}
-
+//---------Fonction Update----------------------
 function addJoueurPartie($idPartie,$idUser){
     $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
     SQLInsert($sql);
@@ -75,11 +26,7 @@ function addJoueurPartie($idPartie,$idUser){
     SQLUpdate($sql);
 }
 
-function listeUserDansPartie($idPartie){
-    $sql = "SELECT user.idUser,user.pseudo,user.argent FROM user,historique WHERE historique.idPartie='$idPartie' AND user.iduser=historique.idUser";
-    return parcoursRs(SQLSelect($sql));
-}
-
+//-----------Fonction Delete----------------------
 function quitterLaPartie($idPartie,$idUser){
     /*
     problème avec nextjoueur ?
@@ -107,13 +54,58 @@ function quitterLaPartie($idPartie,$idUser){
     }
 }
 
+
+//---------Fonction insertion-------------------
+function creerPartie($nbpers,$temps,$cave){
+    $sql = "INSERT INTO partie VALUES(0,'$nbpers','$temps',1,'$cave')";
+    return SQLInsert($sql);
+}
+function creerhistorique($idUser,$idPartie){
+    $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
+    return SQLInsert($sql);
+}
+function creerManche($idPartie){
+    $sql = "INSERT INTO manche VALUES(0,'$idPartie','0') ";
+    return SQLInsert($sql);
+}
+function creerTable($idmanche,$carte1,$carte2,$carte3,$carte4,$carte5){
+    $sql = "INSERT INTO tableJeu VALUES(0,'$idmanche','$carte1','$carte2','$carte3','$carte4','$carte5',0) ";
+    return SQLInsert($sql);
+}
+function creerPaire($idUser,$idmanche,$c1,$c2){
+    $sql = "INSERT INTO joueurPaire VALUES(0,'$idUser','$idmanche','$c1','$c2') ";
+    return SQLInsert($sql); 
+}
+function creerRole($idUser,$role,$idmanche){
+    $sql = "INSERT INTO role VALUES(0,'$idUser','$role',$idmanche,0,NULL) ";
+    return SQLInsert($sql);
+}
+
+
+//------------Fonction SELECT-------------------
+function infoUser($pseudo,$idUser=-1){
+    $sql = "SELECT * FROM user WHERE (pseudo='$pseudo')";
+    if($idUser != -1) $sql .= "OR (iduser='$idUser')";
+    return parcoursRs(SQLSelect($sql))[0];
+}
+function listerParties(){
+    $sql = "SELECT * FROM partie WHERE nbJoueurs<nbJoueurMax";
+    return parcoursRs(SQLSelect($sql));
+}
+function idManche($idPartie){
+    $sql = "SELECT m.idmanche FROM manche m, partie p WHERE m.idPartie = p.idPartie AND m.termine = 0" ;
+    return SQLGetChamp($sql);  
+}
+function userDansPartie($idUser){
+    $sql = "SELECT * FROM historique WHERE idUser='$idUser'";
+    return parcoursRs(SQLSelect($sql));
+}
 function nbJoueursDansPartie($idPartie) {
     $sql = "SELECT nbJoueurs FROM partie WHERE idPartie='$idPartie'";
     return SQLGetChamp($sql);
 }
-
 function recupTable($idPartie){
-    $sql = "SELECT partie.idPartie,partie.cavemin,partie.cavemin,tableJeu.carte1,tableJeu.carte2,tableJeu.carte3,tableJeu.carte4,tableJeu.carte5,tableJeu.pot
+    $sql = "SELECT partie.idPartie,partie.cavemin,partie.nbJoueurs,tableJeu.carte1,tableJeu.carte2,tableJeu.carte3,tableJeu.carte4,tableJeu.carte5,tableJeu.pot
             FROM tableJeu,manche,partie
             WHERE tableJeu.idmanche=manche.idmanche
             AND partie.idPartie=manche.idPartie
@@ -121,9 +113,8 @@ function recupTable($idPartie){
             AND partie.idPartie='$idPartie'";
     return parcoursRs(SQLSelect($sql))[0];
 }
-
 function recupRole($idPartie){
-    $sql = "SELECT user.pseudo,role.role,role.statut , partie.nbJoueurs
+    $sql = "SELECT user.pseudo,role.role,role.statut
             FROM role,manche,partie,user 
             WHERE partie.idPartie=manche.idPartie 
             AND role.idmanche=manche.idmanche 
@@ -132,5 +123,12 @@ function recupRole($idPartie){
             AND partie.idPartie='$idPartie'";
     return parcoursRs(SQLSelect($sql));
 }
-
+function listeUserDansPartie($idPartie){
+    $sql = "SELECT user.idUser,user.pseudo,user.argent FROM user,historique WHERE historique.idPartie='$idPartie' AND user.iduser=historique.idUser";
+    return parcoursRs(SQLSelect($sql));
+}
+function recupPaire($idmanche,$idUser){
+    $sql="SELECT carte1,carte2 FROM joueurPaire WHERE idmanche = '$idmanche' AND idUser = '$idUser'";
+    return parcoursRs(SQLSELECT($sql))[0];
+}
 ?>

@@ -1,6 +1,6 @@
 var c;
 var ctx;
-var nbj = 8 ;//symbolique
+var nbj;//symbolique
 var size = 100; //largeur du rect
 
 
