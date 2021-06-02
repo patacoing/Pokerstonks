@@ -5,18 +5,18 @@ function waitPaire(){
     else{
         setTimeout(waitPaire,1000);
     }
-    drawPerso(maPaire.carte1,maPaire.carte2);
-
 }
 function waitJoueur(){
+    recupInfoUsers(idPartie);
     if(usersInfo.length > 1){
+
         distribCarte();
-        drawPerso(maPaire.carte1,maPaire.carte2); 
-        
+        waitPaire();
+
     }
     else{
         setTimeout(waitJoueur,1000);
-    }  
+    }
 }
 function waitTable(){
     if(table == undefined){

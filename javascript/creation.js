@@ -3,6 +3,7 @@ var ctx;
 var nbj;//symbolique
 var size = 100; //largeur du rect
 var d2;
+var input;
 
 //--------------------------Récupéré vià ajax--------------------------------------
 //info sur partie :
@@ -22,7 +23,7 @@ var roleJoueur;
 //var tableau;
 //info sur le joueur :
 var argent  =5;
-var couche = 0; //si vaut 1 ==> mettre les boutons d'actions en disabled
+var coucher = 0;
 var carteJoueur = [];
 var deltaMise = 0;
 var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons 

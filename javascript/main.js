@@ -24,6 +24,7 @@ function init(){
     idPartie = document.getElementById("idPartie").value;
     idUser = document.getElementById("idUser").value;
     pseudo = document.getElementById("pseudo").value;
+    input = document.getElementById("slct");
     usersInfo = 6;
     recupInfoUsers(idPartie);
     console.log(usersInfo,"js = merde");
@@ -39,8 +40,12 @@ function main(){
     {
         genRole();
     }
+    drawTable();
     drawJoueur();
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
+    recupTable(idPartie);
+    creerSelect();
+    if(maPaire != undefined)drawPerso(maPaire.carte1,maPaire.carte2);
     setTimeout(main,1000);
 }
 function checkRole(){
@@ -61,7 +66,8 @@ function checkRole(){
         genPlateau();
         creerTable(idPartie,tab[0],tab[0],tab[0],carteManche[0],carteManche[1]);
         recupTable(idPartie);
-        distribCarte();   
+        distribCarte(); 
+        console.log(carteManche); 
         drawPlateau(carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]); 
         
     }
@@ -125,16 +131,19 @@ function distribCarte(){
         creerPaire(idPartie,usersInfo[i].idUser,carteJoueur[0],carteJoueur[1]);
     }
 }
-function pretempo(){
-    facto(100);
-}
-function facto(n){
-    if(n == 0){
-        return 1;
+function creerSelect(){
+    var temp;
+    var nb;
+    temp = "<select id='mise'>";
+    for(let i = 1;i < 6;i++){
+        if(usersInfo[monIndex].argent/i >= table.pot)
+        {
+            nb = parseInt(usersInfo[monIndex].argent/i)
+            temp += "<option value='"+nb+"'>"+nb+"</option>";
+        }
     }
-    else{
-        return n*facto(n-1);
-    }
+    temp+=  "</select>";
+    input.innerHTML = temp
 }
 
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined

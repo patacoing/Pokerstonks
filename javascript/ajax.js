@@ -16,43 +16,23 @@ function recupTable(idPartie){
 }
 function creerTable(idPartie,c1,c2,c3,c4,c5){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            return;
-        }
-    };
-    xhttp.open("GET", "ajax/creerTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, true);
+    xhttp.open("GET", "ajax/creerTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, false);
     xhttp.send();
 }
 function addCarte(idPartie,c1,c2,c3,c4,c5){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            return;
-        }
-    };
-    xhttp.open("GET", "ajax/updateTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, true);
+    xhttp.open("GET", "ajax/updateTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, false);
     xhttp.send();
 }
 
 function creerPaire(idPartie,idUser,c1,c2){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            return;
-        }
-    };
-    xhttp.open("GET", "ajax/creerPaire.php?idPartie="+idPartie+"&idUser="+idUser+"&c1="+c1+"&c2="+c2, true);
+    xhttp.open("GET", "ajax/creerPaire.php?idPartie="+idPartie+"&idUser="+idUser+"&c1="+c1+"&c2="+c2, false);
     xhttp.send();
 }
 function creerRole(idPartie,idUser,role){
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            return;
-        }
-    };
-    xhttp.open("GET", "ajax/creerRole.php?idPartie="+idPartie+"&idUser="+idUser+"&role="+role, true);
+    xhttp.open("GET", "ajax/creerRole.php?idPartie="+idPartie+"&idUser="+idUser+"&role="+role, false);
     xhttp.send();
 }
 function recupInfoUsers (idPartie){
@@ -68,4 +48,16 @@ function recupPaire (idPartie,idUser){
     xhttp.send();
     maPaire = JSON.parse(xhttp.responseText);    
 
+}
+
+function creerCoup(idUser,choix,mise){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
+    xhttp.open();
+}
+
+function seCoucher(idUser,idPartie){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/seCoucher.php?idUser="+idUser+"&idPartie="+idPartie,false);
+    xhttp.open();
 }

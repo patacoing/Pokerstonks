@@ -1,10 +1,14 @@
 function drawJoueur(){
+    ctx.font = "20px Georgia";
     var dist =   (c.width/usersInfo.length - size)/2;
     for(let i = 0; i < usersInfo.length;i++)
     {
         ctx.beginPath();
         ctx.fillStyle = "red";
-        ctx.fillRect(dist,10, size, 200)
+        ctx.fillRect(dist,10, size, 200);
+        ctx.fillStyle = "black";
+        ctx.fillText(usersInfo[i].pseudo,dist,25);
+        ctx.fillText(usersInfo[i].argent+"$",dist,50);
         dist += c.width/usersInfo.length ;
         ctx.stroke(); 
         ctx.closePath();      
