@@ -4,6 +4,6 @@ include_once "../libs/maLibUtils.php";
 
 if($idPartie = valider("idPartie","GET")){
     $idManche = idManche($idPartie);
-    echo json_encode(recupTour($idManche));
+    echo recupMaxemise($idManche);
 }
 ?>

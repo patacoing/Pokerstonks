@@ -33,6 +33,7 @@ function init(){
     
 }
 function main(){
+    recupTour(idPartie);
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
     if(usersInfo.length > nbj && role[monIndex].role==1)
@@ -41,9 +42,9 @@ function main(){
     }
     drawTable();
     drawJoueur();
-    drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     if(maPaire != undefined)drawPerso(maPaire.carte1,maPaire.carte2);
-    setTimeout(main,1000);
+    drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
+    setTimeout(main,500);
 }
 function checkRole(){
     

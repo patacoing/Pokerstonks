@@ -189,5 +189,14 @@ function recupTour($idManche){
     else return parcoursRs(SQLSelect($sql))[0];
 }
 
+function recupMaxemise($idManche){
+    $tableau = coupsDansManche($idManche);
+    $max = 0;
+    for($i=0;$i<count($tableau);$i++){
+        if($tableau[$i]['mise'] > $max) $max = $tableau[$i]['mise'];
+    }
+    return $max;
+}
+
 
 ?>

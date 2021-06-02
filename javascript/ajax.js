@@ -61,7 +61,8 @@ function creerCoup(idUser,choix,mise){
         if(monIndex+1 > usersInfo.length-1){
             nextjoueur = usersInfo[0].idUser;
         }else nextjoueur = usersInfo[monIndex+1];
-        xhttp.open("GET","ajax/creerTour.php?idPartie="+idPartie+"&idCoup="+idCoup+"&nextjoueur="+nextjoueur+"&maxmise=",false);
+        recupMaxemise(idPartie);
+        xhttp.open("GET","ajax/creerTour.php?idPartie="+idPartie+"&idCoup="+idCoup+"&nextjoueur="+nextjoueur+"&maxmise="+maxmise,false);
     }else{
         xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
     }
@@ -79,12 +80,19 @@ function recupCoupsManche(idPartie){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET","ajax/recupCoupsManche.php?idPartie="+idPartie,false);
     xhttp.open();
-    coupsManche = xhttp.responseText;
+    coupsManche = JSON.parse(xhttp.responseText);
 }
 
-function recupTour(){
+function recupTour(idPartie){
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET","ajax/recupTour.php?idPartie=",false);
+    xhttp.open("GET","ajax/recupTour.php?idPartie="+idPartie,false);
     xhttp.send();
-    tour = xhttp.responseText;
+    tour = JSON.parse(xhttp.responseText);
+}
+
+function recupMaxemise(idPartie){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/recupMaxemise.php?idPartie="+idPartie,false);
+    xhttp.send();
+    maxmise = xhttp.responseText;
 }
