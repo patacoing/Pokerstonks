@@ -24,6 +24,16 @@ function creerTable(idPartie,c1,c2,c3,c4,c5){
     xhttp.open("GET", "ajax/creerTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, true);
     xhttp.send();
 }
+function addCarte(idPartie,c1,c2,c3,c4,c5){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            return;
+        }
+    };
+    xhttp.open("GET", "ajax/updateTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, true);
+    xhttp.send();
+}
 
 function creerPaire(idPartie,idUser,c1,c2){
     var xhttp = new XMLHttpRequest();

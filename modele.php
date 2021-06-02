@@ -25,7 +25,22 @@ function addJoueurPartie($idPartie,$idUser){
     $sql = "UPDATE partie SET nbJoueurs=nbJoueurs+1 WHERE idPartie='$idPartie'";
     SQLUpdate($sql);
 }
+function addCarte($idPartie,$idmanche,$c1,$c2,$c3,$c4,$c5){
+    $sql = "UPDATE tableJeu SET carte1='$c1' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
+    SQLUpdate($sql);
 
+    $sql = "UPDATE tableJeu SET carte2='$c2' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
+    SQLUpdate($sql);
+
+    $sql = "UPDATE tableJeu SET carte3='$c3' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
+    SQLUpdate($sql);
+
+    $sql = "UPDATE tableJeu SET carte4='$c4' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
+    SQLUpdate($sql);
+    
+    $sql = "UPDATE tableJeu SET carte5='$c5' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
+    SQLUpdate($sql);
+}
 //-----------Fonction Delete----------------------
 function quitterLaPartie($idPartie,$idUser){
     /*

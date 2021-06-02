@@ -3,7 +3,7 @@ window.addEventListener("load",init);
 
 
 
-for(let i = 0; i < 52;i++)
+for(let i = 0; i < 53;i++)
 {
     image[i] = new Image();
     image[i].src = paquet[i].lien;
@@ -52,7 +52,7 @@ function checkRole(){
 
     if(table == undefined && usersInfo.length==1){//lors de la création de la partie ou si il ne reste qu'un joueur
     genPlateau(); //on génère tout
-    creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
+    creerTable(idPartie,tab[0],tab[0],tab[0],carteManche[0],carteManche[1]);
     recupTable(idPartie); //on récupère
     waitJoueur(); //on distribue des cartes si qqun rejoinds
     }
@@ -61,7 +61,7 @@ function checkRole(){
     }
     if(table == undefined && usersInfo.length >1 && role[monIndex].role == 1){//nouvelle manche
         genPlateau();
-        creerTable(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
+        creerTable(idPartie,tab[0],tab[0],tab[0],carteManche[0],carteManche[1]);
         recupTable(idPartie);
         distribCarte();   
         drawPlateau(carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]); 
@@ -105,7 +105,7 @@ function genPlateau()
     
     for(let i = 0; i < 5;i++)
     {
-        alea = parseInt(Math.random()*tab.length);
+        alea = parseInt(Math.random()*tab.length)+1;
         carteManche[i] = tab[alea];
         //il faut afficher les cartes de table sinon c'est aléatoire pour tous les joueurs
         
@@ -119,7 +119,7 @@ function distribCarte(){
     {
         for(let j = 0; j < 2;j++)
         {           
-        alea = parseInt(Math.random()*tab.length);
+        alea = parseInt(Math.random()*tab.length)+1;
         carteJoueur[j] = tab[alea];
         tab.splice(alea,1);
         }

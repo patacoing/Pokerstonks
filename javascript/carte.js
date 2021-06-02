@@ -1,4 +1,5 @@
 var paquet = [
+    {"valeur":"0","couleur":"dos","lien":"images/cartes/dos-bleu.png"},
     {"valeur":"1","couleur":"carreau","lien":"images/cartes/02-carreau.png"},
     {"valeur":"1","couleur":"trefle","lien":"images/cartes/02-trefle.png"},
     {"valeur":"1","couleur":"coeur","lien":"images/cartes/02-coeur.png"},
