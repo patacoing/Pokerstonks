@@ -175,6 +175,19 @@ function recupPaire($idmanche,$idUser){
     if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
     else return parcoursRs(SQLSELECT($sql))[0];
 }
+function coupsDansManche($idManche){
+    $sql = "SELECT c.idCoup,c.idUser,c.choix,c.mise 
+        FROM tour t,manche m,coup c
+        WHERE m.idmanche=t.idManche
+        AND t.idCoup=c.idCoup
+        AND m.idmanche='$idManche'";
+    return parcoursRs(SQLSelect($sql));
+}
+function recupTour($idManche){
+    $sql = "SELECT * FROM tour WHERE idManche='$idManche' ORDER BY id LIMIT 1";
+    if(!count(parcoursRs(SQLSelect($sql)))) return parcoursRs(SQLSelect($sql));
+    else return parcoursRs(SQLSelect($sql))[0];
+}
 
 
 ?>

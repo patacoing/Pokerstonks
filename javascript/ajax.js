@@ -52,7 +52,19 @@ function recupPaire (idPartie,idUser){
 
 function creerCoup(idUser,choix,mise){
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
+    recupCoupsManche(idPartie);
+    if(coupsManche.length ==0){
+        xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
+        xhttp.send();
+        let idCoup = xhttp.responseText;
+        let nextjoueur;
+        if(monIndex+1 > usersInfo.length-1){
+            nextjoueur = usersInfo[0].idUser;
+        }else nextjoueur = usersInfo[monIndex+1];
+        xhttp.open("GET","ajax/creerTour.php?idPartie="+idPartie+"&idCoup="+idCoup+"&nextjoueur="+nextjoueur+"&maxmise=",false);
+    }else{
+        xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
+    }
     xhttp.open();
 }
 
@@ -60,4 +72,19 @@ function seCoucher(idUser,idPartie){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET","ajax/seCoucher.php?idUser="+idUser+"&idPartie="+idPartie,false);
     xhttp.open();
+}
+
+
+function recupCoupsManche(idPartie){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/recupCoupsManche.php?idPartie="+idPartie,false);
+    xhttp.open();
+    coupsManche = xhttp.responseText;
+}
+
+function recupTour(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/recupTour.php?idPartie=",false);
+    xhttp.send();
+    tour = xhttp.responseText;
 }

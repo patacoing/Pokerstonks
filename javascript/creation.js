@@ -19,11 +19,13 @@ var pseudo;
 var monIndex;
 var role;
 var roleJoueur;
+var coupsManche;
+var tour;
 
 //var tableau;
 //info sur le joueur :
 var argent  =5;
-var coucher = 0;
+var couche = 0;
 var carteJoueur = [];
 var deltaMise = 0;
 var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons 
