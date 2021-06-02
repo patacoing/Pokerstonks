@@ -39,9 +39,11 @@ function main(){
     {
         genRole();
     }
+    drawTable();
     drawJoueur();
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
-    setTimeout(main,1000);
+    if(maPaire != undefined)drawPerso(maPaire.carte1,maPaire.carte2);
+    requestAnimationFrame(main);
 }
 function checkRole(){
     
@@ -63,7 +65,8 @@ function checkRole(){
         genPlateau();
         creerTable(idPartie,tab[0],tab[0],tab[0],carteManche[0],carteManche[1]);
         recupTable(idPartie);
-        distribCarte();   
+        distribCarte(); 
+        console.log(carteManche); 
         drawPlateau(carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]); 
         
     }

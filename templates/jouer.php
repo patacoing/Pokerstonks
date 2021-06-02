@@ -11,11 +11,11 @@ if(!$pseudo) header("Location:index.php?view=accueil");
     if($idPartie = valider("idPartie","COOKIE")) header("Location:index.php?view=partie&idPartie=".$idPartie);
     else {
 ?>
-<h2>Rejoindre une partie</h2>
+<h2 style="color:white">Rejoindre une partie</h2>
 <?php
 $parties = listerParties();
 for($i=0;$i<count($parties);$i++){
-    ?> <div style='border: 1px solid black;width:200px;display:inline-block' class='table'>
+    ?> <div style='border: 1px solid black;width:200px;display:inline-block;background-color:white' class='table'>
         <p>nombre de joueurs dans la partie : <?php echo $parties[$i]['nbJoueurs'] ?></p>
         <p>temps par coups : <?php echo $parties[$i]['tempsParCoup'] ?>s </p>
         <p>cave minimale : <?php echo $parties[$i]['cavemin'] ?>€ </p>
@@ -28,9 +28,9 @@ for($i=0;$i<count($parties);$i++){
 <?php
 }
 ?>
-<h2>Créer une partie:</h2>
+<h2 style="color:white">Créer une partie:</h2>
 <form action="controleur.php">
-<span>nombres de joueur</span>
+<span style="color:white">nombres de joueur</span>
     <select name="nbjoueur" >
         <option value="3">3</option>
         <option value="4">4</option>
@@ -39,7 +39,7 @@ for($i=0;$i<count($parties);$i++){
         <option value="7">7</option>
         <option value="8">8</option>
     </select>
-<span>temps</span>
+<span style="color:white">temps</span>
     <select name="temps">
         <option value="5">5</option>
         <option value="10">10</option>
@@ -48,7 +48,7 @@ for($i=0;$i<count($parties);$i++){
         <option value="25">25</option>
         <option value="30">30</option>
     </select>
-<span>cave minimale:</span>
+<span style="color:white">cave minimale:</span>
     <select name="cave">
         <option value="200000">200 000</option>
         <option value="500000">500 000</option>
