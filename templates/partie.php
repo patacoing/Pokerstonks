@@ -16,7 +16,7 @@ $joueursDansPartie = listeUserDansPartie($idPartie);
     <canvas id="myCanvas" width="1200" height="600" style="margin:0px" ></canvas>
     <div id="bts" style="background-color:green;text-align:center;">
         <input type="button" id="parler" value="parler"/>
-        <input type="button" id="coucher" value="coucher"/>
+        <input type="button" id="couche" value="coucher"/>
         <input type="button" id="miser" value="miser" disabled="true"/>
         <input type="button" id="moitiePot" value="1/2 pot"/>
         <input type="button" id="unPot" value="1 * pot"/>

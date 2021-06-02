@@ -43,7 +43,7 @@ function main(){
     drawJoueur();
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     if(maPaire != undefined)drawPerso(maPaire.carte1,maPaire.carte2);
-    requestAnimationFrame(main);
+    setTimeout(main,1000);
 }
 function checkRole(){
     
