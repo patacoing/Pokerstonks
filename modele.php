@@ -102,7 +102,7 @@ function infoUser($pseudo,$idUser=-1){
     $sql = "SELECT * FROM user WHERE (pseudo='$pseudo')";
     if($idUser != -1) $sql .= "OR (iduser='$idUser')";
     if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
-    else return parcoursRs(SQLSELECT($sql))[0];
+    else return parcoursRs(SQLSelect($sql))[0];
 }
 function listerParties(){
     $sql = "SELECT * FROM partie WHERE nbJoueurs<nbJoueurMax";
@@ -128,7 +128,7 @@ function recupTable($idPartie){
             AND manche.termine=0
             AND partie.idPartie='$idPartie'";
     if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
-    else return parcoursRs(SQLSELECT($sql))[0];
+    else return parcoursRs(SQLSelect($sql))[0];
 }
 function recupRole($idPartie){
     $sql = "SELECT user.idUser,role.role,role.statut

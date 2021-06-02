@@ -17,6 +17,7 @@ var idPartie;
 var pseudo;
 var monIndex;
 var role;
+var roleJoueur;
 
 //var tableau;
 //info sur le joueur :

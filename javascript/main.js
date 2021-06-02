@@ -35,7 +35,7 @@ function init(){
 function main(){
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
-    if(usersInfo.length > nbj && role[monIndex].role == 1)
+    if(usersInfo.length > nbj && role[monIndex].role==1)
     {
         genRole();
     }
@@ -78,7 +78,7 @@ function genRole(){
     var bigblinde = -1;
     var ptiteblinde = -1;
     var flag = 0;
-    for(let i = 0; i < role.length-1;i++){
+    for(let i = 0; i < role.length;i++){
         if(role[i].role == 2){
             bigblinde = 1;
         }
