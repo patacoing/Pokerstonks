@@ -53,20 +53,22 @@ function recupPaire (idPartie,idUser){
 function creerCoup(idUser,choix,mise){
     var xhttp = new XMLHttpRequest();
     recupCoupsManche(idPartie);
+    recupMaxemise(idPartie);
     if(coupsManche.length ==0){
         xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
         xhttp.send();
-        let idCoup = xhttp.responseText;
-        let nextjoueur;
-        if(monIndex+1 > usersInfo.length-1){
-            nextjoueur = usersInfo[0].idUser;
-        }else nextjoueur = usersInfo[monIndex+1];
-        recupMaxemise(idPartie);
+        let idCoup = xhttp.responseText;   
+        
         xhttp.open("GET","ajax/creerTour.php?idPartie="+idPartie+"&idCoup="+idCoup+"&nextjoueur="+nextjoueur+"&maxmise="+maxmise,false);
     }else{
         xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
+        xhttp.open("GET","ajax/creerTour.php?idPartie="+idPartie+"&idCoup="+idCoup+"&nextjoueur="+nextjoueur+"&maxmise="+maxmise,false);
     }
     xhttp.open();
+    let nextjoueur;
+    if(monIndex+1 > usersInfo.length-1){
+        nextjoueur = usersInfo[0].idUser;
+    }else nextjoueur = usersInfo[monIndex+1];
 }
 
 function seCoucher(idUser,idPartie){
@@ -81,13 +83,6 @@ function recupCoupsManche(idPartie){
     xhttp.open("GET","ajax/recupCoupsManche.php?idPartie="+idPartie,false);
     xhttp.open();
     coupsManche = JSON.parse(xhttp.responseText);
-}
-
-function recupTour(idPartie){
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET","ajax/recupTour.php?idPartie="+idPartie,false);
-    xhttp.send();
-    tour = JSON.parse(xhttp.responseText);
 }
 
 function recupMaxemise(idPartie){
