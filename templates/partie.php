@@ -22,6 +22,8 @@ $joueursDansPartie = listeUserDansPartie($idPartie);
         <input type="button" id="unPot" value="1 * pot"/>
         <input type="button" id="deuxPot" value="2 * pot"/>
         <input type="button" id="suivre" value="suivre"/>
+        <div id="slct" style="display:inline-block">
+    </div>
     </div>
 </div>
 <script type="text/javascript" src="javascript/creation.js"> </script>

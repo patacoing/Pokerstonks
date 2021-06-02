@@ -5,7 +5,7 @@ document.getElementById("moitiePot").addEventListener("click",moitiePot);
 document.getElementById("unPot").addEventListener("click",unPot);
 document.getElementById("deuxPot").addEventListener("click",deuxPot);
 document.getElementById("suivre").addEventListener("click",suivre);
-
+document.getElementById("mise").addEventListener("click",miseSelect);
 /*
 choix coup:
 -1 => Parler
@@ -76,6 +76,11 @@ function deuxPot(){
         document.getElementById("miser").disabled = false;    
     }
 }
+function miseSelect(){
+    if(monTour && !coucher){
+        mise = input.value;
+        document.getElementById("miser").disabled = false;    
+    }   
+}
 
 //il faut aussi récup le pot à chaque actualisation
-

@@ -3,6 +3,7 @@ var ctx;
 var nbj;//symbolique
 var size = 100; //largeur du rect
 var d2;
+var input;
 
 //--------------------------Récupéré vià ajax--------------------------------------
 //info sur partie :
@@ -33,6 +34,7 @@ var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons
 
 var depart = 50;
 var rajout;
+var roleJoueur;
 var rajoutPlateau;
 var rajoutPerso = 50;
 var tab = [];

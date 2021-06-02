@@ -24,6 +24,7 @@ function init(){
     idPartie = document.getElementById("idPartie").value;
     idUser = document.getElementById("idUser").value;
     pseudo = document.getElementById("pseudo").value;
+    input = document.getElementById("slct");
     usersInfo = 6;
     recupInfoUsers(idPartie);
     console.log(usersInfo,"js = merde");
@@ -43,14 +44,16 @@ function main(){
     drawTable();
     drawJoueur();
     if(maPaire != undefined)drawPerso(maPaire.carte1,maPaire.carte2);
+    
+    drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
+    creerSelect();
+    recupTable(idPartie);
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     setTimeout(main,500);
 }
 function checkRole(){
     
     nbj = usersInfo.length;
-
-    monIndex = -1;
     waitRole();
 
     if(table == undefined && usersInfo.length==1){//lors de la création de la partie ou si il ne reste qu'un joueur
@@ -131,16 +134,19 @@ function distribCarte(){
         creerPaire(idPartie,usersInfo[i].idUser,carteJoueur[0],carteJoueur[1]);
     }
 }
-function pretempo(){
-    facto(100);
-}
-function facto(n){
-    if(n == 0){
-        return 1;
+function creerSelect(){
+    var temp;
+    var nb;
+    temp = "<select id='mise'>";
+    for(let i = 1;i < 6;i++){
+        if(usersInfo[monIndex].argent/i >= table.pot)
+        {
+            nb = parseInt(usersInfo[monIndex].argent/i)
+            temp += "<option value='"+nb+"'>"+nb+"</option>";
+        }
     }
-    else{
-        return n*facto(n-1);
-    }
+    temp+=  "</select>";
+    input.innerHTML = temp
 }
 
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
