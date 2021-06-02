@@ -42,11 +42,12 @@ function main(){
     }
     drawTable();
     drawJoueur();
-    drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
-    recupTable(idPartie);
-    creerSelect();
     if(maPaire != undefined)drawPerso(maPaire.carte1,maPaire.carte2);
-    setTimeout(main,1000);
+    
+    drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
+    creerSelect();
+    recupTable(idPartie);
+    setTimeout(main,500);
 }
 function checkRole(){
     
