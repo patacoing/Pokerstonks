@@ -41,6 +41,14 @@ function addCarte($idPartie,$idmanche,$c1,$c2,$c3,$c4,$c5){
     $sql = "UPDATE tableJeu SET carte5='$c5' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
     SQLUpdate($sql);
 }
+function seCoucher($idUser,$idManche){
+    $sql = "UPDATE role SET coucher=1 WHERE iduser='$idUser' AND idmanche='$idManche'";
+    return SQLUpdate($sql);
+}
+function reduireArgent($idUser,$mise){
+    $sql = "UPDATE user SET argent='$mise' WHERE iduser='$idUser'";
+    return SQLUpdate($sql);
+}
 //-----------Fonction Delete----------------------
 function quitterLaPartie($idPartie,$idUser){
     /*
@@ -68,6 +76,20 @@ function quitterLaPartie($idPartie,$idUser){
         return SQLDelete($sql);
     }
 }
+function supprimerTours($idManche){
+    $sql = "DELETE FROM tour WHERE idManche='$idManche'";
+    return SQLDelete($sql);
+}
+function supprimerCoups($idPartie){
+    $sql = "DELETE FROM coup WHERE idUser=(SELECT idUser FROM historique WHERE idPartie='$idPartie')";
+    return SQLDelete($sql);
+}
+function supprimerManche($idPartie){
+    $sql = "DELETE FROM manche WHERE idPartie='$idPartie'";
+    return SQLDelete($sql);
+}
+
+
 
 
 //---------Fonction insertion-------------------
@@ -93,6 +115,10 @@ function creerPaire($idUser,$idmanche,$c1,$c2){
 }
 function creerRole($idUser,$role,$idmanche){
     $sql = "INSERT INTO role VALUES(0,'$idUser','$role',$idmanche,0,NULL) ";
+    return SQLInsert($sql);
+}
+function creerCoup($idUser,$choix,$mise){
+    $sql = "INSERT INTO coup VALUES(0,'$idUser','$choix','$mise')";
     return SQLInsert($sql);
 }
 
@@ -149,4 +175,6 @@ function recupPaire($idmanche,$idUser){
     if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
     else return parcoursRs(SQLSELECT($sql))[0];
 }
+
+
 ?>

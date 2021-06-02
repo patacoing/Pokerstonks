@@ -49,3 +49,15 @@ function recupPaire (idPartie,idUser){
     maPaire = JSON.parse(xhttp.responseText);    
 
 }
+
+function creerCoup(idUser,choix,mise){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
+    xhttp.open();
+}
+
+function seCoucher(idUser,idPartie){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/seCoucher.php?idUser="+idUser+"&idPartie="+idPartie,false);
+    xhttp.open();
+}
