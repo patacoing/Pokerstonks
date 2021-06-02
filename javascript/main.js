@@ -35,13 +35,13 @@ function init(){
 function main(){
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
-    if(usersInfo.length > nbj)
+    if(usersInfo.length > nbj && role[monIndex].role==1)
     {
         genRole();
     }
     drawJoueur();
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
-    requestAnimationFrame(main);
+    setTimeout(main,1000);
 }
 function checkRole(){
     
@@ -80,24 +80,25 @@ function genRole(){
     var bigblinde = -1;
     var ptiteblinde = -1;
     var flag = 0;
-    for(let i = 0; i < usersInfo.length-1;i++){
-        if(usersInfo[i].role == 2){
+    for(let i = 0; i < role.length;i++){
+        if(role[i].role == 2){
             bigblinde = 1;
         }
-        else if(usersInfo[i].role == 3)
+        else if(role[i].role == 3)
         {
             ptiteblinde = 1;
         }
     }
     if(bigblinde == -1){
-        role = 2;
+        roleJoueur = 2;
     }
     else if(bigblinde == 1 && ptiteblinde == -1){
-        role = 3;
+        roleJoueur = 3;
     }
     else{
-        role = 4;
+        roleJoueur = 4;
     }
+    creerRole(idPartie,idUser,roleJoueur);
 }
 function genPlateau()
 {
