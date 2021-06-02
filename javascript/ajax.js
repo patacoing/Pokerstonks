@@ -14,6 +14,21 @@ function recupTable(idPartie){
     table = JSON.parse(xhttp.responseText);
 
 }
+function recupInfoUsers (idPartie){
+    var xhttp = new XMLHttpRequest(); 
+     xhttp.open("GET", "ajax/recupInfoUsers.php?idPartie="+idPartie, false);
+     xhttp.send();
+     usersInfo = JSON.parse(xhttp.responseText);       
+}
+
+function recupPaire (idPartie,idUser){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "ajax/recupPaire.php?idPartie="+idPartie+"&idUser="+idUser, false);
+    xhttp.send();
+    maPaire = JSON.parse(xhttp.responseText);    
+
+}
+
 function creerTable(idPartie,c1,c2,c3,c4,c5){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "ajax/creerTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, false);
@@ -35,36 +50,11 @@ function creerRole(idPartie,idUser,role){
     xhttp.open("GET", "ajax/creerRole.php?idPartie="+idPartie+"&idUser="+idUser+"&role="+role, false);
     xhttp.send();
 }
-function recupInfoUsers (idPartie){
-    var xhttp = new XMLHttpRequest(); 
-     xhttp.open("GET", "ajax/recupInfoUsers.php?idPartie="+idPartie, false);
-     xhttp.send();
-     usersInfo = JSON.parse(xhttp.responseText);       
-}
 
-function recupPaire (idPartie,idUser){
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "ajax/recupPaire.php?idPartie="+idPartie+"&idUser="+idUser, false);
-    xhttp.send();
-    maPaire = JSON.parse(xhttp.responseText);    
-
-}
 
 function creerCoup(idUser,choix,mise){
     var xhttp = new XMLHttpRequest();
-    recupCoupsManche(idPartie);
-    if(coupsManche.length ==0){
-        xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
-        xhttp.send();
-        let idCoup = xhttp.responseText;
-        let nextjoueur;
-        if(monIndex+1 > usersInfo.length-1){
-            nextjoueur = usersInfo[0].idUser;
-        }else nextjoueur = usersInfo[monIndex+1];
-        xhttp.open("GET","ajax/creerTour.php?idPartie="+idPartie+"&idCoup="+idCoup+"&nextjoueur="+nextjoueur+"&maxmise=",false);
-    }else{
-        xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
-    }
+    xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
     xhttp.open();
 }
 
@@ -74,17 +64,16 @@ function seCoucher(idUser,idPartie){
     xhttp.open();
 }
 
-
 function recupCoupsManche(idPartie){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET","ajax/recupCoupsManche.php?idPartie="+idPartie,false);
     xhttp.open();
-    coupsManche = xhttp.responseText;
+    coupsManche = JSON.parse(xhttp.responseText);
 }
 
-function recupTour(){
+function recupMaxemise(idPartie){
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET","ajax/recupTour.php?idPartie=",false);
+    xhttp.open("GET","ajax/recupMaxemise.php?idPartie="+idPartie,false);
     xhttp.send();
-    tour = xhttp.responseText;
+    maxmise = xhttp.responseText;
 }

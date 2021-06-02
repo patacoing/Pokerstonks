@@ -34,6 +34,7 @@ function init(){
     
 }
 function main(){
+    recupTour(idPartie);
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
     if(usersInfo.length > nbj && role[monIndex].role==1)
@@ -47,6 +48,7 @@ function main(){
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     creerSelect();
     recupTable(idPartie);
+    drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     setTimeout(main,500);
 }
 function checkRole(){

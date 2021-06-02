@@ -58,7 +58,6 @@ function quitterLaPartie($idPartie,$idUser){
     if(!(nbJoueursDansPartie($idPartie)-1)){
         $sql = "DELETE FROM historique WHERE idUser=$idUser AND idPartie='$idPartie';";
         $sql .= "DELETE FROM coup WHERE idUser=$idUser;";
-        $sql .= "DELETE FROM tour WHERE idmanche = (SELECT m.idmanche FROM manche m , partie p WHERE m.idPartie = $idPartie);";
         $sql .= "DELETE FROM joueurPaire WHERE idUser='$idUser';";
         $sql .= "DELETE FROM role WHERE iduser=$idUser;";
         $sql .= "DELETE FROM tableJeu WHERE idmanche = (SELECT m.idmanche FROM manche m , partie p WHERE m.idPartie = $idPartie);";
@@ -76,10 +75,7 @@ function quitterLaPartie($idPartie,$idUser){
         return SQLDelete($sql);
     }
 }
-function supprimerTours($idManche){
-    $sql = "DELETE FROM tour WHERE idManche='$idManche'";
-    return SQLDelete($sql);
-}
+
 function supprimerCoups($idPartie){
     $sql = "DELETE FROM coup WHERE idUser=(SELECT idUser FROM historique WHERE idPartie='$idPartie')";
     return SQLDelete($sql);
@@ -176,17 +172,20 @@ function recupPaire($idmanche,$idUser){
     else return parcoursRs(SQLSELECT($sql))[0];
 }
 function coupsDansManche($idManche){
-    $sql = "SELECT c.idCoup,c.idUser,c.choix,c.mise 
-        FROM tour t,manche m,coup c
-        WHERE m.idmanche=t.idManche
-        AND t.idCoup=c.idCoup
+    $sql = "SELECT c.idUser,c.choix,c.mise, c.maxmise,c.nextjoueur
+        FROM manche m,coup c
+        WHERE m.idmanche=c.idmanche
         AND m.idmanche='$idManche'";
     return parcoursRs(SQLSelect($sql));
 }
-function recupTour($idManche){
-    $sql = "SELECT * FROM tour WHERE idManche='$idManche' ORDER BY id LIMIT 1";
-    if(!count(parcoursRs(SQLSelect($sql)))) return parcoursRs(SQLSelect($sql));
-    else return parcoursRs(SQLSelect($sql))[0];
+
+function recupMaxemise($idManche){
+    $tableau = coupsDansManche($idManche);
+    $max = 0;
+    for($i=0;$i<count($tableau);$i++){
+        if($tableau[$i]['mise'] > $max) $max = $tableau[$i]['mise'];
+    }
+    return $max;
 }
 
 

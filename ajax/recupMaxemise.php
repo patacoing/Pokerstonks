@@ -2,8 +2,8 @@
 include_once "../modele.php";
 include_once "../libs/maLibUtils.php";
 
-if($idUser = valider("idPartie","GET")){
+if($idPartie = valider("idPartie","GET")){
     $idManche = idManche($idPartie);
-    echo json_encode(recupTour($idManche));
+    echo recupMaxemise($idManche);
 }
 ?>
