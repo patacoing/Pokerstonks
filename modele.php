@@ -37,7 +37,7 @@ function addCarte($idPartie,$idmanche,$c1,$c2,$c3,$c4,$c5){
 
     $sql = "UPDATE tableJeu SET carte4='$c4' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
     SQLUpdate($sql);
-    
+
     $sql = "UPDATE tableJeu SET carte5='$c5' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
     SQLUpdate($sql);
 }
@@ -101,7 +101,8 @@ function creerRole($idUser,$role,$idmanche){
 function infoUser($pseudo,$idUser=-1){
     $sql = "SELECT * FROM user WHERE (pseudo='$pseudo')";
     if($idUser != -1) $sql .= "OR (iduser='$idUser')";
-    return parcoursRs(SQLSelect($sql))[0];
+    if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
+    else return parcoursRs(SQLSELECT($sql))[0];
 }
 function listerParties(){
     $sql = "SELECT * FROM partie WHERE nbJoueurs<nbJoueurMax";
@@ -126,7 +127,8 @@ function recupTable($idPartie){
             AND partie.idPartie=manche.idPartie
             AND manche.termine=0
             AND partie.idPartie='$idPartie'";
-    return parcoursRs(SQLSelect($sql))[0];
+    if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
+    else return parcoursRs(SQLSELECT($sql))[0];
 }
 function recupRole($idPartie){
     $sql = "SELECT user.idUser,role.role,role.statut
@@ -144,6 +146,7 @@ function listeUserDansPartie($idPartie){
 }
 function recupPaire($idmanche,$idUser){
     $sql="SELECT carte1,carte2 FROM joueurPaire WHERE idmanche = '$idmanche' AND idUser = '$idUser'";
-    return parcoursRs(SQLSELECT($sql))[0];
+    if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
+    else return parcoursRs(SQLSELECT($sql))[0];
 }
 ?>

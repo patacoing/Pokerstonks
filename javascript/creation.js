@@ -29,6 +29,7 @@ var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons
 
 var depart = 50;
 var rajout;
+var roleJoueur;
 var rajoutPlateau;
 var rajoutPerso = 50;
 var tab = [];

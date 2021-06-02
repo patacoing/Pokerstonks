@@ -23,7 +23,7 @@ function waitTable(){
         recupTable(idPartie);
     }
     else{
-        setTimeout(waitTable,100);
+        setTimeout(waitTable,1000);
     }
 }
 function waitRole(){
@@ -35,8 +35,8 @@ function waitRole(){
             break;
         }
     }
-    if(monIndex = -1){
+    if(monIndex == -1){
         recupRole(idPartie);
-        setTimeout(waitRole,100);
+        setTimeout(waitRole,1000);
     }
 }
