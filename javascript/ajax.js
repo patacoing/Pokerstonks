@@ -54,24 +54,28 @@ function creerRole(idPartie,idUser,role){
 
 
 function creerCoup(idUser,choix,mise,idPartie,nextjoueur,maxmise){
+    if(monIndex+1 > usersInfo.length-1){
+        nextjoueur = usersInfo[0].idUser;
+    }else {
+        nextjoueur = usersInfo[monIndex+1].idUser;
+    }
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise+"&idPartie="+idPartie+"&nextjoueur="+nextjoueur+"&maxmise="+maxmise,false);
     xhttp.send();
-    if(monIndex+1 > usersInfo.length-1){
-        nextjoueur = usersInfo[0].idUser;
-    }else nextjoueur = usersInfo[monIndex+1];
 }
 
 function seCoucher(idUser,idPartie){
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("GET","ajax/seCoucher.php?idUser="+idUser+"&idPartie="+idPartie,false);
-    xhttp.open();
+    if(couche != 1){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET","ajax/seCoucher.php?idUser="+idUser+"&idPartie="+idPartie,false);
+        xhttp.send();
+    }
 }
 
 function recupCoupsManche(idPartie){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET","ajax/recupCoupsManche.php?idPartie="+idPartie,false);
-    xhttp.open();
+    xhttp.send();
     coupsManche = JSON.parse(xhttp.responseText);
 }
 
@@ -86,4 +90,14 @@ function recupMamise(idPartie,idUser){
     xhttp.open("GET","ajax/recupMamise.php?idPartie="+idPartie+"&idUser="+idUser,false);
     xhttp.send();
     maMise = xhttp.responseText;  
+}
+
+function recupDernierCoup(idPartie){
+    recupCoupsManche(idPartie);
+    var i=-1;
+    for(let j=0;j<coupsManche.length;j++){
+        if(coupsManche[j].idcoup > i) i = j;
+    }
+    if(i == -1) dernierCoup = [];
+    else dernierCoup = coupsManche[i];
 }

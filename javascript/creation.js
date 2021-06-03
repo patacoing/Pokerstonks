@@ -24,6 +24,7 @@ var tour;
 var maxmise;
 var nextjoueur;
 var maMise;
+var dernierCoup;
 //var tableau;
 //info sur le joueur :
 var argent  =5;

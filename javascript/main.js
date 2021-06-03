@@ -34,7 +34,34 @@ function init(){
     
 }
 function main(){
+    //il faut savoir si c'est mon tour : récup le dernier coup et voir si le nextjoueur = idUser
+    // oui : monTour = 1;
+    // non : monTour = 0;
+    waitTable();
+    pot = table.pot;
+    recupDernierCoup(idPartie);
+    if(dernierCoup.length != 0){
+        if(dernierCoup.nextjoueur == idUser) {
+            monTour = 1;
+            //console.log("c'est mon tour !");
+        }else monTour = 0;
+        nextjoueur = dernierCoup.nextjoueur;
+    }else if(role[monIndex].role==1) monTour = 1;
+    else monTour = 0;
+
+
     recupRole(idPartie);
+    couche = role[monIndex].coucher;
+    if(couche && monTour) { //si on est couché et que c'est notre tour, on passe direct au joueur suivant
+        monTour = 0;
+        if(monIndex+1 > usersInfo.length-1){
+            nextjoueur = usersInfo[0].idUser;
+        }else {
+            nextjoueur = usersInfo[monIndex+1].idUser;
+        }
+        recupMaxemise(idPartie);
+        creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise);
+    }
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
     
@@ -73,6 +100,7 @@ function checkRole(){
         waitTable();
         distribCarte(); 
         waitPaire();
+        monTour = 1;
         console.log(carteManche); 
         
     }
@@ -164,10 +192,7 @@ function creerSelect(){
     temp+=  "</select>";
     input.innerHTML = temp
 }
-function maMise(idUser){
-    recupCoupsManche(idPartie);
-    
-}
+
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
 
 

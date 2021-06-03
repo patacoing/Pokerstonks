@@ -152,7 +152,7 @@ function recupTable($idPartie){
     else return parcoursRs(SQLSelect($sql))[0];
 }
 function recupRole($idPartie){
-    $sql = "SELECT user.idUser,role.role,role.statut
+    $sql = "SELECT user.idUser,role.role,role.statut,role.coucher
             FROM role,manche,partie,user 
             WHERE partie.idPartie=manche.idPartie 
             AND role.idmanche=manche.idmanche 
@@ -171,7 +171,7 @@ function recupPaire($idmanche,$idUser){
     else return parcoursRs(SQLSELECT($sql))[0];
 }
 function coupsDansManche($idManche){
-    $sql = "SELECT c.idUser,c.choix,c.mise, c.maxmise,c.nextjoueur
+    $sql = "SELECT c.idcoup,c.idUser,c.choix,c.mise, c.maxmise,c.nextjoueur
         FROM manche m,coup c
         WHERE m.idmanche=c.idmanche
         AND m.idmanche='$idManche'";

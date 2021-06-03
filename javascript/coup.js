@@ -22,7 +22,6 @@ function parler(){
         recupMaxemise(idPartie);
         creerCoup(idUser,1,0,idPartie,nextjoueur,maxmise); //fait le coup (ne modifie pas l'argent car argent -0)
         monTour = 0;
-        //il passer le tour au joueur suivant
     }
 }
 function coucher(){
@@ -30,16 +29,18 @@ function coucher(){
         console.log("couche");
         recupMaxemise(idPartie)
         creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise); //fait le coup (ne modifie pas l'argent car argent -0)
-        secouche(idUser);
+        seCoucher(idUser);
         monTour =0;
+        couche =0;
         //il passer le tour au joueur suivant
     }
 }
 function miser(){
     // TO DO
     if(monTour && !couche){
+
         console.log("mise : "+mise);
-        creerCoup(idUser,3,0,idPartie,nextjoueur,mise); //fait le coup et réduit l'argent du joueur
+        creerCoup(idUser,3,mise,idPartie,nextjoueur,mise); //fait le coup et réduit l'argent du joueur
         monTour = 0;
         //il passer le tour au joueur suivant
     }
@@ -48,10 +49,13 @@ function suivre(){
     if(monTour && !couche){
         console.log("suivre");
         recupMaxemise(idPartie);
+        recupMamise(idPartie,idUser);
         deltaMise = maxmise - maMise;
-        argent -= deltaMise;
-        creerCoup(idUser,3,0,idPartie,nextjoueur,mise); //fait le coup et réduit l'argent du joueur
-        monTour = 0;
+        if(argent - deltaMise > 0){
+            argent -= deltaMise;
+            creerCoup(idUser,4,deltaMise,idPartie,nextjoueur,maxmise); //fait le coup et réduit l'argent du joueur
+            monTour = 0;
+        }else console.log("vous n'avez pas assez d'argent !");
         //il passer le tour au joueur suivant
     }
 }
@@ -59,25 +63,25 @@ function suivre(){
 
 function moitiePot(){
     if(monTour && !couche){
-        mise = 0.5*pot;
+        deltaMise = 0.5*pot;
         document.getElementById("miser").disabled = false;    
     }
 }
 function unPot(){
     if(monTour && !couche){
-        mise = pot;
+        deltaMise = pot;
         document.getElementById("miser").disabled = false;    
     }
 }
 function deuxPot(){
     if(monTour && !couche){
-        mise = 2*pot;
+        deltaMise = 2*pot;
         document.getElementById("miser").disabled = false;    
     }
 }
 function miseSelect(){
     if(monTour && !coucher){
-        mise = input.value;
+        deltaMise = input.value;
         document.getElementById("miser").disabled = false;    
     }   
 }
