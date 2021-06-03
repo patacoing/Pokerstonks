@@ -162,6 +162,11 @@ function recupPaire($idmanche,$idUser){
     if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
     else return parcoursRs(SQLSELECT($sql))[0];
 }
+function recupPairePlateau($idmanche){
+    $sql="SELECT carte1,carte2 FROM joueurPaire WHERE idmanche = '$idmanche'";
+    if(count(parcoursRs(SQLSelect($sql)))==0) return parcoursRs(SQLSelect($sql));
+    else return parcoursRs(SQLSELECT($sql))[0];
+}
 function coupsDansManche($idManche){
     $sql = "SELECT c.idcoup,c.idUser,c.choix,c.mise, c.maxmise,c.nextjoueur
         FROM manche m,coup c

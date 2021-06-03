@@ -10,6 +10,19 @@ function waitPaire(){
         }
     }
 }
+function waitPairePlateau(){
+    recupPairePlateau(idPartie,idUser);
+    if(pairePlateau == undefined)
+    {
+        setTimeout(waitPairePlateau,500);
+    }
+    else{
+        if(pairePlateau.length == 0){
+            setTimeout(waitPairePlateau,500);
+        }
+    }
+}
+
 function waitJoueur(){
     recupInfoUsers(idPartie);
     if(usersInfo.length > 1){

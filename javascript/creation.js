@@ -34,6 +34,8 @@ var deltaMise = 0;
 var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons 
 var cpTour = 0;
 var temoinShow;
+var pairePlateau;
+var CartePlateau = [][];
 var carteDevoile;
 //----------------------------------------------------------------------------------
 

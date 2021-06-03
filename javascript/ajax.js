@@ -28,7 +28,13 @@ function recupPaire (idPartie,idUser){
     maPaire = JSON.parse(xhttp.responseText);    
 
 }
+function recupPairePlateau(idPartie){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "ajax/recupPairePlateau.php?idPartie="+idPartie, false);
+    xhttp.send();
+    pairePlateau = JSON.parse(xhttp.responseText);    
 
+}
 function creerTable(idPartie,c1,c2,c3,c4,c5){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "ajax/creerTable.php?idPartie="+idPartie+"&c1="+c1+"&c2="+c2+"&c3="+c3+"&c4="+c4+"&c5="+c5, false);

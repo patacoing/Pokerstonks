@@ -56,6 +56,10 @@ function main(){
     if(role[monIndex].role==1  && dernierCoup.idUser == usersInfo[usersInfo.length-1].idUser && temoinShow == 1){
         compteTour();
     }
+    if(carteDevoile == 5 && dernierCoup.idUser == usersInfo[usersInfo.length-1].idUser)
+    {
+        checkPartie();
+    }
     drawTable();
     drawJoueur();
     if(maPaire != undefined){
@@ -248,5 +252,11 @@ function passeTour(){
         }
         recupMaxemise(idPartie);
         creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise);
+    }
+}
+function checkPartie(){
+    if((usersInfo[monIndex].idUser == nextjoueur && cpTour == 2) || (cpTour == 1 && (dernierCoup.choix != 4 && dernierCoup.choix != 3)))
+    {
+        waitPairePlateau();
     }
 }
