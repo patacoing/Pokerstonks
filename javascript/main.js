@@ -34,56 +34,55 @@ function init(){
     
 }
 function main(){
-    recupTour(idPartie);
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
+
     if(usersInfo.length > nbj && role[monIndex].role==1)
     {
         genRole();
     }
     drawTable();
     drawJoueur();
-    if(maPaire != undefined)drawPerso(maPaire.carte1,maPaire.carte2);
-    
+    if(maPaire != undefined){
+        if(maPaire.length !=0){
+            drawPerso(maPaire.carte1,maPaire.carte2);
+        }
+    }
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
-    creerSelect();
-    recupTable(idPartie);
-    drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
+    //creerSelect();
+    //recupTable(idPartie);
     setTimeout(main,500);
 }
 function checkRole(){
-    
     nbj = usersInfo.length;
     waitRole();
 
     if(table == undefined && usersInfo.length==1){//lors de la création de la partie ou si il ne reste qu'un joueur
-    genPlateau(); //on génère tout
-    creerTable(idPartie,tab[0],tab[0],tab[0],carteManche[0],carteManche[1]);
-    recupTable(idPartie); //on récupère
-    waitJoueur(); //on distribue des cartes si qqun rejoinds
+        genPlateau(); //on génère tout
+        creerTable(idPartie,tab[0],tab[0],tab[0],tab[0],tab[0]);
+        waitTable();
+        waitJoueur(); //on distribue des cartes si qqun rejoinds
     }
     else if(table == undefined){
-        waitTable(); //si on a pas le bon rôle on attend
+        waitTable();
     }
     if(table == undefined && usersInfo.length >1 && role[monIndex].role == 1){//nouvelle manche
         genPlateau();
         creerTable(idPartie,tab[0],tab[0],tab[0],carteManche[0],carteManche[1]);
-        recupTable(idPartie);
+        waitTable();
         distribCarte(); 
         console.log(carteManche); 
-        drawPlateau(carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]); 
         
     }
     else if(table != undefined && usersInfo.length >1){//récupérer sa paire
         waitPaire();
-        drawPerso(maPaire.carte1,maPaire.carte2);
-        recupTable(idPartie);
-        drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
+        waitTable();
     }
 
 }
 
 function genRole(){
+    recupRole(idPartie);
     var bigblinde = -1;
     var ptiteblinde = -1;
     var flag = 0;
@@ -115,8 +114,6 @@ function genPlateau()
     {
         alea = parseInt(Math.random()*tab.length)+1;
         carteManche[i] = tab[alea];
-        //il faut afficher les cartes de table sinon c'est aléatoire pour tous les joueurs
-        
         tab.splice(alea,1);
               
     }
