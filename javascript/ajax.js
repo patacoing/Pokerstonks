@@ -47,6 +47,7 @@ function creerPaire(idPartie,idUser,c1,c2){
 }
 function creerRole(idPartie,idUser,role){
     var xhttp = new XMLHttpRequest();
+    console.log("role=",role);
     xhttp.open("GET", "ajax/creerRole.php?idPartie="+idPartie+"&idUser="+idUser+"&role="+role, false);
     xhttp.send();
 }

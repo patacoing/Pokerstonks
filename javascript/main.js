@@ -104,7 +104,7 @@ function genRole(){
     else{
         roleJoueur = 4;
     }
-    creerRole(idPartie,idUser,roleJoueur);
+    creerRole(idPartie,usersInfo[usersInfo.length-1].idUser,roleJoueur);
 }
 function genPlateau()
 {
