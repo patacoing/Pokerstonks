@@ -81,3 +81,9 @@ function recupMaxemise(idPartie){
     xhttp.send();
     maxmise = xhttp.responseText;
 }
+function recupMamise(idPartie,idUser){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/recupMamise.php?idPartie="+idPartie+"&idUser="+idUser,false);
+    xhttp.send();
+    maMise = xhttp.responseText;  
+}

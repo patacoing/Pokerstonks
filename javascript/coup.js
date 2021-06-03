@@ -18,30 +18,28 @@ choix coup:
 
 
 function parler(){
-    //if(monTour && !couche){
-        console.log("parler");
-        nextjoueur = 2;
-        creerCoup(idUser,1,0,idPartie,nextjoueur,0); //fait le coup (ne modifie pas l'argent car argent -0)
+    if(monTour && !couche){
+        recupMaxemise(idPartie);
+        creerCoup(idUser,1,0,idPartie,nextjoueur,maxmise); //fait le coup (ne modifie pas l'argent car argent -0)
         monTour = 0;
         //il passer le tour au joueur suivant
-    //}
+    }
 }
 function coucher(){
     if(monTour && !couche){
         console.log("couche");
-        creerCoup(idUser,2,0); //fait le coup (ne modifie pas l'argent car argent -0)
+        recupMaxemise(idPartie)
+        creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise); //fait le coup (ne modifie pas l'argent car argent -0)
         secouche(idUser);
         monTour =0;
         //il passer le tour au joueur suivant
     }
 }
 function miser(){
+    // TO DO
     if(monTour && !couche){
         console.log("mise : "+mise);
-
-
-
-        creerCoup(idUser,3,mise); //fait le coup et réduit l'argent du joueur
+        creerCoup(idUser,3,0,idPartie,nextjoueur,mise); //fait le coup et réduit l'argent du joueur
         monTour = 0;
         //il passer le tour au joueur suivant
     }
@@ -49,9 +47,10 @@ function miser(){
 function suivre(){
     if(monTour && !couche){
         console.log("suivre");
+        recupMaxemise(idPartie);
+        deltaMise = maxmise - maMise;
         argent -= deltaMise;
-        creerCoup(idUser,4,miseDernierJoueur); //fait le coup et réduit l'argent du joueur
-
+        creerCoup(idUser,3,0,idPartie,nextjoueur,mise); //fait le coup et réduit l'argent du joueur
         monTour = 0;
         //il passer le tour au joueur suivant
     }

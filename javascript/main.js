@@ -52,7 +52,7 @@ function main(){
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     //creerSelect();
     //recupTable(idPartie);
-    setTimeout(main,50);
+    setTimeout(main,200);
 }
 function checkRole(){
     nbj = usersInfo.length;
@@ -107,6 +107,7 @@ function genRole(){
         roleJoueur = 4;
     }
     creerRole(idPartie,usersInfo[usersInfo.length-1].idUser,roleJoueur);
+    recupRole(idPartie);
 }
 function ecrireRole(role){
     switch(role){
@@ -163,7 +164,10 @@ function creerSelect(){
     temp+=  "</select>";
     input.innerHTML = temp
 }
-
+function maMise(idUser){
+    recupCoupsManche(idPartie);
+    
+}
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
 
 

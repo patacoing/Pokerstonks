@@ -23,7 +23,7 @@ var coupsManche;
 var tour;
 var maxmise;
 var nextjoueur;
-
+var maMise;
 //var tableau;
 //info sur le joueur :
 var argent  =5;

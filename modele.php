@@ -186,6 +186,14 @@ function recupMaxemise($idManche){
     }
     return $max;
 }
+function recupMamise($idManche,$idUser){
+    $tableau = coupsDansManche($idManche);
+    $maMise = 0;
+    for($i=0;$i<count($tableau);$i++){
+        if($tableau[$i]['mise'] > $maMise && $tableau[$i]['idUser'] == $idUser) $maMise = $tableau[$i]['mise'];
+    }
+    return $maMise;   
+}
 
 
 ?>
