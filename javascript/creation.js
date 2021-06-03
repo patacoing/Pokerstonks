@@ -22,6 +22,7 @@ var roleJoueur;
 var coupsManche;
 var tour;
 var maxmise;
+var nextjoueur;
 
 //var tableau;
 //info sur le joueur :

@@ -2,7 +2,7 @@ function waitPaire(){
     recupPaire(idPartie,idUser);
     if(maPaire == undefined)
     {
-        setTimeout(waitPaire,1000);
+        setTimeout(waitPaire,500);
     }
     else{
         if(maPaire.length == 0){
