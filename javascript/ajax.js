@@ -53,11 +53,10 @@ function creerRole(idPartie,idUser,role){
 }
 
 
-function creerCoup(idUser,choix,mise){
+function creerCoup(idUser,choix,mise,idPartie,nextjoueur,maxmise){
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise,false);
-    xhttp.open();
-    let nextjoueur;
+    xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise+"&idPartie="+idPartie+"&nextjoueur="+nextjoueur+"&maxmise="+maxmise,false);
+    xhttp.send();
     if(monIndex+1 > usersInfo.length-1){
         nextjoueur = usersInfo[0].idUser;
     }else nextjoueur = usersInfo[monIndex+1];

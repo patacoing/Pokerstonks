@@ -46,7 +46,7 @@ function seCoucher($idUser,$idManche){
     return SQLUpdate($sql);
 }
 function reduireArgent($idUser,$mise){
-    $sql = "UPDATE user SET argent='$mise' WHERE iduser='$idUser'";
+    $sql = "UPDATE user SET argent=argent-'$mise' WHERE iduser='$idUser'";
     return SQLUpdate($sql);
 }
 //-----------Fonction Delete----------------------
@@ -112,8 +112,8 @@ function creerRole($idUser,$role,$idmanche){
     $sql = "INSERT INTO role VALUES(0,'$idUser','$role',$idmanche,0,NULL) ";
     return SQLInsert($sql);
 }
-function creerCoup($idUser,$choix,$mise){
-    $sql = "INSERT INTO coup VALUES(0,'$idUser','$choix','$mise')";
+function creerCoup($idUser,$choix,$mise,$idManche,$nextjoueur,$maxmise){
+    $sql = "INSERT INTO coup VALUES(0,'$idUser','$choix','$mise','$idManche','$nextjoueur','$nextjoueur')";
     return SQLInsert($sql);
 }
 

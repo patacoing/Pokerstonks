@@ -34,6 +34,7 @@ function init(){
     
 }
 function main(){
+    recupRole(idPartie);
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
 
@@ -51,7 +52,7 @@ function main(){
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     //creerSelect();
     //recupTable(idPartie);
-    setTimeout(main,500);
+    setTimeout(main,50);
 }
 function checkRole(){
     nbj = usersInfo.length;

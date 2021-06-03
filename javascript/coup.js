@@ -5,7 +5,6 @@ document.getElementById("moitiePot").addEventListener("click",moitiePot);
 document.getElementById("unPot").addEventListener("click",unPot);
 document.getElementById("deuxPot").addEventListener("click",deuxPot);
 document.getElementById("suivre").addEventListener("click",suivre);
-document.getElementById("mise").addEventListener("click",miseSelect);
 /*
 choix coup:
 -1 => Parler
@@ -19,12 +18,13 @@ choix coup:
 
 
 function parler(){
-    if(monTour && !couche){
+    //if(monTour && !couche){
         console.log("parler");
-        creerCoup(idUser,1,0); //fait le coup (ne modifie pas l'argent car argent -0)
+        nextjoueur = 2;
+        creerCoup(idUser,1,0,idPartie,nextjoueur,0); //fait le coup (ne modifie pas l'argent car argent -0)
         monTour = 0;
         //il passer le tour au joueur suivant
-    }
+    //}
 }
 function coucher(){
     if(monTour && !couche){
