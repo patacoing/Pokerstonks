@@ -20,19 +20,7 @@ function connexion($pseudo,$mdp){
 
 //---------Fonction Update----------------------
 function addCarte($idPartie,$idmanche,$c1,$c2,$c3,$c4,$c5){
-    $sql = "UPDATE tableJeu SET carte1='$c1' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
-    SQLUpdate($sql);
-
-    $sql = "UPDATE tableJeu SET carte2='$c2' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
-    SQLUpdate($sql);
-
-    $sql = "UPDATE tableJeu SET carte3='$c3' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
-    SQLUpdate($sql);
-
-    $sql = "UPDATE tableJeu SET carte4='$c4' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
-    SQLUpdate($sql);
-
-    $sql = "UPDATE tableJeu SET carte5='$c5' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
+    $sql = "UPDATE tableJeu SET carte1='$c1' , carte2='$c2' ,carte3='$c3' , carte4='$c4', carte5='$c5' WHERE idmanche='$idmanche'";
     SQLUpdate($sql);
 }
 function seCoucher($idUser,$idManche){

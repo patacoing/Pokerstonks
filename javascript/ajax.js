@@ -54,6 +54,7 @@ function creerRole(idPartie,idUser,role){
 
 
 function creerCoup(idUser,choix,mise,idPartie,nextjoueur,maxmise){
+    if(role[monIndex].role) temoinShow = 1;
     if(monIndex+1 > usersInfo.length-1){
         nextjoueur = usersInfo[0].idUser;
     }else {
@@ -70,7 +71,6 @@ function updatePot(idPartie,nouvPot){
     xhttp.open("GET","ajax/updatePot.php?idPartie="+idPartie+"&nouvPot="+nouvPot,false);
     xhttp.send();
 }
-
 function seCoucher(idUser,idPartie){
     if(couche != 1){
         var xhttp = new XMLHttpRequest();

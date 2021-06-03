@@ -22,7 +22,7 @@ var roleJoueur;
 var coupsManche;
 var tour;
 var maxmise=0;
-var nextjoueur;
+var nextjoueur = 0;
 var maMise=0;
 var dernierCoup;
 //var tableau;
@@ -32,6 +32,9 @@ var couche = 0;
 var carteJoueur = [];
 var deltaMise = 0;
 var monTour = 0;  // si ==1 ==> je peux jouer sinon on disable les boutons 
+var cpTour = 0;
+var temoinShow;
+var carteDevoile;
 //----------------------------------------------------------------------------------
 
 var depart = 50;

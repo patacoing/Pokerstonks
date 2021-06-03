@@ -27,7 +27,6 @@ function init(){
     input = document.getElementById("slct");
     usersInfo = 6;
     recupInfoUsers(idPartie);
-    console.log(usersInfo,"js = merde");
     recupRole(idPartie);
     checkRole();
     disabledButton();
@@ -49,10 +48,13 @@ function main(){
     passeTour();
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
-    
+        
     if(usersInfo.length > nbj && role[monIndex].role==1)
     {
         genRole();
+    }
+    if(role[monIndex].role==1  && dernierCoup.idUser == usersInfo[usersInfo.length-1].idUser && temoinShow == 1){
+        compteTour();
     }
     drawTable();
     drawJoueur();
@@ -64,7 +66,7 @@ function main(){
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     //creerSelect();
     //recupTable(idPartie);
-    setTimeout(main,200);
+    setTimeout(main,500);
 }
 function checkRole(){
     nbj = usersInfo.length;
@@ -73,6 +75,7 @@ function checkRole(){
     if(table == undefined && usersInfo.length==1){//lors de la création de la partie ou si il ne reste qu'un joueur
         genPlateau(); //on génère tout
         creerTable(idPartie,tab[0],tab[0],tab[0],tab[0],tab[0]);
+        carteDevoile = 0;
         waitTable();
         waitJoueur(); //on distribue des cartes si qqun rejoinds
     }
@@ -81,7 +84,8 @@ function checkRole(){
     }
     if(table == undefined && usersInfo.length >1 && role[monIndex].role == 1){//nouvelle manche
         genPlateau();
-        creerTable(idPartie,tab[0],tab[0],tab[0],carteManche[0],carteManche[1]);
+        creerTable(idPartie,tab[0],tab[0],tab[0],tab[0],tab[0]);
+        carteDevoile = 0;
         waitTable();
         distribCarte(); 
         waitPaire();
@@ -175,18 +179,46 @@ function creerSelect(){
         }
     }
     temp+=  "</select>";
-    input.innerHTML = temp
+    input.innerHTML = temp;
 }
 
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
 
-
-function Tourfinit(){
-    if(usersInfo[nextjoueur].role == 1){
-        if(dernierCoup.choix == 3){
-
+function compteTour(){
+    if(usersInfo[monIndex].idUser == nextjoueur)
+    {
+        if(cpTour == 1 && (dernierCoup.choix != 4 && dernierCoup.choix != 3)){
+            devoilementCarte();
+        }
+        if(cpTour == 0){
+            cpTour = 1;
+        }
+        else{
+            cpTour++;
+        }
+        if(cpTour == 2){
+            devoilementCarte(); 
         }
     }
+}
+function devoilementCarte(){
+    console.log("coucou");
+        carteDevoile++;
+        switch(carteDevoile){
+            case 1:
+                addCarte(idPartie,carteManche[0],carteManche[1],tab[0],tab[0],tab[0]);
+            break;
+            case 2:
+                addCarte(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],tab[0]); 
+            break;  
+            case 3:
+                addCarte(idPartie,carteManche[0],carteManche[1],carteManche[2],carteManche[3],carteManche[4]);
+                carteDevoile=0;  
+            break;           
+        }
+    waitTable();
+    cpTour = 0;
+    temoinShow = 0;
 }
 
 function checkCoup(){
