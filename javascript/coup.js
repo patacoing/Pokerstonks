@@ -53,7 +53,8 @@ function coucher(){
 }
 function miser(){
     // TO DO
-    if(monTour && !couche && (maMise+deltaMise)>=maxmise){ // on teste si ce que l'on veut miser est supérieur à la mise maximale de la manche
+    console.log(maMise+deltaMise);
+    if(monTour && !couche && (maMise+parseInt(deltaMise))>=maxmise){ // on teste si ce que l'on veut miser est supérieur à la mise maximale de la manche
         maMise += deltaMise;
         console.log("mise : "+maMise);
         creerCoup(idUser,3,deltaMise,nextjoueur,maMise); //fait le coup et réduit l'argent du joueur

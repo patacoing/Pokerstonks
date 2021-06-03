@@ -6,9 +6,11 @@ else{
 }
 $idPartie = valider("idPartie");
 $idUser = valider("idUser","SESSION");
+$caveMin = valider("caveMin");
 echo "<input id='idPartie' type='hidden' value='$idPartie'/>";
 echo "<input id='pseudo' type='hidden' value='$pseudo' />";
 echo "<input id='idUser' type='hidden' value='$idUser' />";
+echo "<input id='caveMin' type='hidden' value='$caveMin' />";
 $joueursDansPartie = listeUserDansPartie($idPartie);
 
 ?>

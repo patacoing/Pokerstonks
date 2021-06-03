@@ -23,6 +23,7 @@ for($i=0;$i<count($parties);$i++){
         <form action='controleur.php'>
             <input type='submit' name='action' value='Rejoindre'>
             <input type='hidden' name='idPartie' value=<?php  echo $parties[$i]['idPartie']   ?>>
+            <input type='hidden' name='caveMin' value=<?php echo $parties[$i]['cavemin'] ?>>
         </form>
     </div>
 <?php

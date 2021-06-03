@@ -40,7 +40,7 @@ function main(){
     // non : monTour = 0;
     recupMaxemise(idPartie);
     waitTable();
-    pot = table.pot;
+    pot = parseInt(table.pot);
     recupDernierCoup(idPartie);
     checkCoup();
 
@@ -54,6 +54,7 @@ function main(){
     {
         genRole();
     }
+    debut();
     drawTable();
     drawJoueur();
     if(maPaire != undefined){
@@ -216,5 +217,22 @@ function passeTour(){
         }
         recupMaxemise(idPartie);
         creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise);
+    }
+}
+
+function debut(){
+    recupCoupsManche(idPartie);
+    if(coupsManche.length == 0 && role[monIndex].role == 1 && usersInfo.length > 1){
+        console.log("rentré");
+        let grandeBlinde = document.getElementById("caveMin").value/1000;
+        let petiteBlinde = grandeBlinde/2;
+        let i;
+        creerCoup(role[monIndex].idUser,3,0,idPartie,nextjoueur,0);
+        if(monIndex+1 > role.length-1) i = 0;
+        else i = monIndex+1;
+        creerCoup(role[i].idUser,3,petiteBlinde,idPartie,nextjoueur,petiteBlinde);
+        if(i+1 > role.length-1) i = 0;
+        else i++;
+        creerCoup(role[i].idUser,3,grandeBlinde,idPartie,nextjoueur,grandeBlinde);
     }
 }
