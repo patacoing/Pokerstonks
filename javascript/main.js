@@ -42,32 +42,11 @@ function main(){
     waitTable();
     pot = table.pot;
     recupDernierCoup(idPartie);
-    if(dernierCoup.length != 0){
-        if(dernierCoup.nextjoueur == idUser) {
-            monTour = 1;
-            enabledButton();
-            //console.log("c'est mon tour !");
-        }else monTour = 0;
-        nextjoueur = dernierCoup.nextjoueur;
-    }else if(role[monIndex].role==1) {
-        monTour = 1;
-        enabledButton()
-    }
-    else monTour = 0;
-
+    checkCoup();
 
     recupRole(idPartie);
     couche = role[monIndex].coucher;
-    if(couche && monTour) { //si on est couché et que c'est notre tour, on passe direct au joueur suivant
-        monTour = 0;
-        if(monIndex+1 > usersInfo.length-1){
-            nextjoueur = usersInfo[0].idUser;
-        }else {
-            nextjoueur = usersInfo[monIndex+1].idUser;
-        }
-        recupMaxemise(idPartie);
-        creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise);
-    }
+    passeTour();
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
     
@@ -202,3 +181,40 @@ function creerSelect(){
 //il faut un temps d'attente avant de pouvoir utiliser tableau sinon il est undefined
 
 
+function Tourfinit(){
+    if(usersInfo[nextjoueur].role == 1){
+        if(dernierCoup.choix == 3){
+
+        }
+    }
+}
+
+function checkCoup(){
+
+    if(dernierCoup.length != 0){
+    if(dernierCoup.nextjoueur == idUser) {
+        monTour = 1;
+        enabledButton();
+        //console.log("c'est mon tour !");
+    }
+    else monTour = 0;
+        nextjoueur = dernierCoup.nextjoueur;
+    }
+    else if(role[monIndex].role==1) {
+        monTour = 1;
+        enabledButton()
+    }
+    else monTour = 0;
+}
+function passeTour(){
+    if(couche && monTour) { //si on est couché et que c'est notre tour, on passe direct au joueur suivant
+        monTour = 0;
+        if(monIndex+1 > usersInfo.length-1){
+            nextjoueur = usersInfo[0].idUser;
+        }else {
+            nextjoueur = usersInfo[monIndex+1].idUser;
+        }
+        recupMaxemise(idPartie);
+        creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise);
+    }
+}
