@@ -17,6 +17,7 @@ function init(){
     rajout = (c.width)/nbj;
     rajoutPlateau = c.width/5;
     rajoutPerso = c.width/2;
+    argent = document.getElementById("argent").value;
 
     drawTable();
 
@@ -45,7 +46,7 @@ function main(){
     checkCoup();
 
     recupRole(idPartie);
-    couche = role[monIndex].coucher;
+    couche = parseInt(role[monIndex].coucher);
     passeTour();
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
@@ -65,6 +66,7 @@ function main(){
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     //creerSelect();
     //recupTable(idPartie);
+    drawPot();
     setTimeout(main,200);
 }
 function checkRole(){
@@ -216,6 +218,7 @@ function passeTour(){
             nextjoueur = usersInfo[monIndex+1].idUser;
         }
         recupMaxemise(idPartie);
+        disabledButton();
         creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise);
     }
 }

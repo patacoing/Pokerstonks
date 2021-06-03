@@ -13,7 +13,6 @@ choix coup:
 -4 => Suivre
 */
 
-//si c'est le premier coup de la manche, il faut créer le tour ==> fonction pour savoir le nombre de coup dans la manche
 function disabledButton(){
     document.getElementById("suivre").disabled = true;
     document.getElementById("deuxPot").disabled = true;
@@ -52,11 +51,8 @@ function coucher(){
     }
 }
 function miser(){
-    // TO DO
-    console.log(maMise+deltaMise);
-    if(monTour && !couche && (maMise+parseInt(deltaMise))>=maxmise){ // on teste si ce que l'on veut miser est supérieur à la mise maximale de la manche
+    if(monTour && !couche && (maMise+deltaMise)>=maxmise && argent-deltaMise >= 0){ // on teste si ce que l'on veut miser est supérieur à la mise maximale de la manche
         maMise += deltaMise;
-        console.log("mise : "+maMise);
         creerCoup(idUser,3,deltaMise,nextjoueur,maMise); //fait le coup et réduit l'argent du joueur
         monTour = 0;
         disabledButton();
@@ -64,7 +60,6 @@ function miser(){
 }
 function suivre(){
     if(monTour && !couche){
-        console.log("suivre");
         recupMaxemise(idPartie);
         recupMamise(idPartie,idUser);
         deltaMise = maxmise - maMise;
@@ -74,7 +69,6 @@ function suivre(){
             disabledButton();
             monTour = 0;
         }else console.log("vous n'avez pas assez d'argent !");
-        //il passer le tour au joueur suivant
     }
 }
 
@@ -82,7 +76,6 @@ function suivre(){
 function moitiePot(){
     if(monTour && !couche){
         deltaMise = 0.5*pot;
-
         document.getElementById("miser").disabled = false;    
     }
 }
@@ -105,4 +98,3 @@ function miseSelect(){
     }   
 }
 
-//il faut aussi récup le pot à chaque actualisation

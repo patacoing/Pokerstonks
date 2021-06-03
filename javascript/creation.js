@@ -27,7 +27,7 @@ var maMise=0;
 var dernierCoup;
 //var tableau;
 //info sur le joueur :
-var argent  =5;
+var argent  =0;
 var couche = 0;
 var carteJoueur = [];
 var deltaMise = 0;

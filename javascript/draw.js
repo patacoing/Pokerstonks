@@ -8,7 +8,7 @@ function drawJoueur(){
         ctx.fillRect(dist,10, size, 200);
         ctx.fillStyle = "black";
         ctx.fillText(usersInfo[i].pseudo,dist,25);
-        ctx.fillText("argent : "+usersInfo[i].argent+"$",dist,50);
+        ctx.fillText("argent : "+usersInfo[i].argent,dist,50);
         ctx.fillText(ecrireRole(role[i].role),dist,75);
         //il faut afficher la mise de chaque joueur ==> les récupérer
         dist += c.width/usersInfo.length ;
@@ -50,4 +50,12 @@ function drawCarte(axeY,indice,dist){
         ctx.stroke();
         ctx.closePath(); 
         
+}
+
+function drawPot(){
+    ctx.beginPath();
+    ctx.fillStyle = "black";
+    ctx.font = "25px Georgia";
+    ctx.fillText("Pot : "+pot,50,500);
+    ctx.closePath();
 }
