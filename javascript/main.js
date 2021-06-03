@@ -30,6 +30,7 @@ function init(){
     console.log(usersInfo,"js = merde");
     recupRole(idPartie);
     checkRole();
+    disabledButton();
     main();
     
 }
@@ -37,16 +38,21 @@ function main(){
     //il faut savoir si c'est mon tour : récup le dernier coup et voir si le nextjoueur = idUser
     // oui : monTour = 1;
     // non : monTour = 0;
+    recupMaxemise(idPartie);
     waitTable();
     pot = table.pot;
     recupDernierCoup(idPartie);
     if(dernierCoup.length != 0){
         if(dernierCoup.nextjoueur == idUser) {
             monTour = 1;
+            enabledButton();
             //console.log("c'est mon tour !");
         }else monTour = 0;
         nextjoueur = dernierCoup.nextjoueur;
-    }else if(role[monIndex].role==1) monTour = 1;
+    }else if(role[monIndex].role==1) {
+        monTour = 1;
+        enabledButton()
+    }
     else monTour = 0;
 
 

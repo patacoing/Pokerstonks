@@ -9,7 +9,7 @@ var input;
 //info sur partie :
 var pot =0;
 var carteManche = []; //retient les 5 cartes générées
-var miseJoueurAvant = 10;
+//var miseJoueurAvant = 10;
 var usersInfo;
 var maPaire;
 var idUser;
@@ -21,9 +21,9 @@ var role;
 var roleJoueur;
 var coupsManche;
 var tour;
-var maxmise;
+var maxmise=0;
 var nextjoueur;
-var maMise;
+var maMise=0;
 var dernierCoup;
 //var tableau;
 //info sur le joueur :

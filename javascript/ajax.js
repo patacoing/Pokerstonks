@@ -62,6 +62,13 @@ function creerCoup(idUser,choix,mise,idPartie,nextjoueur,maxmise){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET","ajax/creerCoup.php?idUser="+idUser+"&choix="+choix+"&mise="+mise+"&idPartie="+idPartie+"&nextjoueur="+nextjoueur+"&maxmise="+maxmise,false);
     xhttp.send();
+    if(choix == 3) updatePot(idPartie,mise);
+}
+
+function updatePot(idPartie,nouvPot){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET","ajax/updatePot.php?idPartie="+idPartie+"&nouvPot="+nouvPot,false);
+    xhttp.send();
 }
 
 function seCoucher(idUser,idPartie){

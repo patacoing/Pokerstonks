@@ -19,12 +19,6 @@ function connexion($pseudo,$mdp){
 }
 
 //---------Fonction Update----------------------
-function addJoueurPartie($idPartie,$idUser){
-    $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
-    SQLInsert($sql);
-    $sql = "UPDATE partie SET nbJoueurs=nbJoueurs+1 WHERE idPartie='$idPartie'";
-    SQLUpdate($sql);
-}
 function addCarte($idPartie,$idmanche,$c1,$c2,$c3,$c4,$c5){
     $sql = "UPDATE tableJeu SET carte1='$c1' WHERE idPartie='$idPartie' AND idmanche='$idmanche'";
     SQLUpdate($sql);
@@ -47,6 +41,10 @@ function seCoucher($idUser,$idManche){
 }
 function reduireArgent($idUser,$mise){
     $sql = "UPDATE user SET argent=argent-'$mise' WHERE iduser='$idUser'";
+    return SQLUpdate($sql);
+}
+function updatePot($idManche,$ajout){
+    $sql = "UPDATE tableJeu SET pot=pot+'$ajout' WHERE idmanche='$idManche'";
     return SQLUpdate($sql);
 }
 //-----------Fonction Delete----------------------
@@ -115,6 +113,12 @@ function creerRole($idUser,$role,$idmanche){
 function creerCoup($idUser,$choix,$mise,$idManche,$nextjoueur,$maxmise){
     $sql = "INSERT INTO coup VALUES(0,'$idUser','$choix','$mise','$idManche','$nextjoueur','$nextjoueur')";
     return SQLInsert($sql);
+}
+function addJoueurPartie($idPartie,$idUser){
+    $sql = "INSERT INTO historique VALUES(0,'$idPartie','$idUser')";
+    SQLInsert($sql);
+    $sql = "UPDATE partie SET nbJoueurs=nbJoueurs+1 WHERE idPartie='$idPartie'";
+    SQLUpdate($sql);
 }
 
 
@@ -190,9 +194,9 @@ function recupMamise($idManche,$idUser){
     $tableau = coupsDansManche($idManche);
     $maMise = 0;
     for($i=0;$i<count($tableau);$i++){
-        if($tableau[$i]['mise'] > $maMise && $tableau[$i]['idUser'] == $idUser) $maMise = $tableau[$i]['mise'];
+        if($tableau[$i]['mise'] > $maMise && $tableau[$i]['idUser'] == $idUser) $maMise += $tableau[$i]['mise'];
     }
-    return $maMise;   
+    return $maMise;  
 }
 
 
