@@ -37,6 +37,7 @@ function main(){
     //il faut savoir si c'est mon tour : récup le dernier coup et voir si le nextjoueur = idUser
     // oui : monTour = 1;
     // non : monTour = 0;
+    recupMaxemise(idPartie);
     waitTable();
     pot = table.pot;
     recupDernierCoup(idPartie);

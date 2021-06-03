@@ -32,17 +32,16 @@ function coucher(){
         seCoucher(idUser);
         monTour =0;
         couche =0;
-        //il passer le tour au joueur suivant
     }
 }
 function miser(){
     // TO DO
-    if(monTour && !couche){
-
-        console.log("mise : "+mise);
-        creerCoup(idUser,3,mise,idPartie,nextjoueur,mise); //fait le coup et réduit l'argent du joueur
+    if(monTour && !couche && (maMise+deltaMise)>=maxmise){ // on teste si ce que l'on veut miser est supérieur à la mise maximale de la manche
+        maMise += deltaMise;
+        console.log("mise : "+maMise);
+        creerCoup(idUser,3,deltaMise,nextjoueur,maMise); //fait le coup et réduit l'argent du joueur
         monTour = 0;
-        //il passer le tour au joueur suivant
+        document.getElementById("miser").disabled = true;
     }
 }
 function suivre(){
@@ -64,6 +63,7 @@ function suivre(){
 function moitiePot(){
     if(monTour && !couche){
         deltaMise = 0.5*pot;
+
         document.getElementById("miser").disabled = false;    
     }
 }
