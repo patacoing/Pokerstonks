@@ -46,7 +46,7 @@ function quitterLaPartie($idPartie,$idUser){
         $sql .= "DELETE FROM coup WHERE idUser=$idUser;";
         $sql .= "DELETE FROM joueurPaire WHERE idUser='$idUser';";
         $sql .= "DELETE FROM role WHERE iduser=$idUser;";
-        $sql .= "DELETE FROM tableJeu WHERE idmanche = (SELECT m.idmanche FROM manche m , partie p WHERE m.idPartie = $idPartie);";
+        $sql .= "DELETE FROM tableJeu WHERE idmanche = (SELECT idmanche FROM manche m WHERE idPartie = $idPartie);";
         $sql .= "DELETE FROM manche WHERE idPartie=$idPartie;";
         SQLDelete($sql);
         $sql = "DELETE FROM partie WHERE idPartie=$idPartie;";
@@ -122,7 +122,7 @@ function listerParties(){
     return parcoursRs(SQLSelect($sql));
 }
 function idManche($idPartie){
-    $sql = "SELECT m.idmanche FROM manche m, partie p WHERE m.idPartie = p.idPartie AND m.termine = 0" ;
+    $sql = "SELECT idmanche FROM manche m WHERE m.idPartie = $idPartie AND termine = 0" ;
     return SQLGetChamp($sql);  
 }
 function userDansPartie($idUser){

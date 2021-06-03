@@ -19,8 +19,6 @@ function init(){
     rajoutPerso = c.width/2;
 
     drawTable();
-
-    //genPerso();
     idPartie = document.getElementById("idPartie").value;
     idUser = document.getElementById("idUser").value;
     pseudo = document.getElementById("pseudo").value;
@@ -68,8 +66,7 @@ function main(){
         }
     }
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
-    //creerSelect();
-    //recupTable(idPartie);
+    creerSelect();
     setTimeout(main,500);
 }
 function checkRole(){
@@ -206,7 +203,7 @@ function compteTour(){
     }
 }
 function devoilementCarte(){
-    console.log("coucou");
+
         carteDevoile++;
         switch(carteDevoile){
             case 1:
@@ -231,7 +228,6 @@ function checkCoup(){
     if(dernierCoup.nextjoueur == idUser) {
         monTour = 1;
         enabledButton();
-        //console.log("c'est mon tour !");
     }
     else monTour = 0;
         nextjoueur = dernierCoup.nextjoueur;
@@ -256,7 +252,13 @@ function passeTour(){
 }
 function checkPartie(){
     if((usersInfo[monIndex].idUser == nextjoueur && cpTour == 2) || (cpTour == 1 && (dernierCoup.choix != 4 && dernierCoup.choix != 3)))
-    {
+    {   var score=[]
         waitPairePlateau();
+        for(let i =0; i < usersInfo.length;i++){
+            if(paquet[pairePlateau[i].carte1].couleur  ==  paquet[pairePlateau[i].carte2].couleur){
+                score[i] = paquet[pairePlateau[i].carte1].valeur + paquet[pairePlateau[i].carte2].valeur;
+            }
+        }
+
     }
 }

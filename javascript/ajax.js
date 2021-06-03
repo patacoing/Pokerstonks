@@ -96,13 +96,13 @@ function recupMaxemise(idPartie){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET","ajax/recupMaxemise.php?idPartie="+idPartie,false);
     xhttp.send();
-    maxmise = xhttp.responseText;
+    maxmise = parseInt(xhttp.responseText);
 }
 function recupMamise(idPartie,idUser){
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET","ajax/recupMamise.php?idPartie="+idPartie+"&idUser="+idUser,false);
     xhttp.send();
-    maMise = xhttp.responseText;  
+    maMise = parseInt(xhttp.responseText);  
 }
 
 function recupDernierCoup(idPartie){

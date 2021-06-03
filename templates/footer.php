@@ -2,7 +2,7 @@
 include_once ("libs/maLibForms.php");
 $pseudo = valider("pseudo","SESSION");
 ?>
-<div class="container-fluid  p-2 bg-dark text-white" style = "height:100px;">
+<div class="container-fluid  p-2 bg-dark text-white fixed-bottom" >
     <div class="row h-50">
         <div class="col-auto">
             <?php if($pseudo) echo "Nom du compte : <strong>$pseudo</strong>";?>   

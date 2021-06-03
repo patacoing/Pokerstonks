@@ -44,9 +44,8 @@ switch($action){
         $id = creerPartie($nbjoueur,$temps,$cave);
         creerhistorique($_SESSION["idUser"],$id);
         $idmanche = creerManche($id);
-        echo $idmanche;
         creerRole($_SESSION["idUser"],1,$idmanche);
-        $qs = "?view=partie&idPartie=$id";
+        $qs = "?view=partie&idPartie=$id&caveMin=$cave";
         setcookie("idPartie",$id,time()+3600*24*30);
         }
         else{
@@ -56,9 +55,10 @@ switch($action){
         
     case "Rejoindre":
         if($pseudo = valider("pseudo","SESSION"))
-        if($idPartie = valider("idPartie")){
+        if($idPartie = valider("idPartie"))
+        if($caveMin = valider("caveMin")){
             addJoueurPartie($idPartie,$_SESSION["idUser"]);
-            $qs = "?view=partie&idPartie=$idPartie";
+            $qs = "?view=partie&idPartie=$idPartie&caveMin=$caveMin";
             setcookie("idPartie",$idPartie,time()+3600*24*30);
     }else $qs = "?view=jouer";
     break;

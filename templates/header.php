@@ -40,7 +40,7 @@ $pseudo = valider("pseudo","SESSION");
           }
           ?>
       </ul>
-      <?php if($pseudo) echo '<span class="navbar-text fw-bold text-white">Solde : '.$_SESSION['argent'].' €</span>';
+      <?php if($pseudo) echo '<span class="navbar-text fw-bold text-white">Solde avant connexion : '.$_SESSION['argent'].' €</span>';
       
       ?>
     </div>
