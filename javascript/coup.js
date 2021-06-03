@@ -18,7 +18,7 @@ choix coup:
 
 
 function parler(){
-    if(monTour && !couche){
+    if(monTour && !couche && maMise == maxmise){
         recupMaxemise(idPartie);
         creerCoup(idUser,1,0,idPartie,nextjoueur,maxmise); //fait le coup (ne modifie pas l'argent car argent -0)
         monTour = 0;
