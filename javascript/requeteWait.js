@@ -6,7 +6,7 @@ function waitPaire(){
     }
     else{
         if(maPaire.length == 0){
-            setTimeout(waitPaire,1000);
+            setTimeout(waitPaire,500);
         }
     }
 }
@@ -19,23 +19,22 @@ function waitJoueur(){
 
     }
     else{
-        setTimeout(waitJoueur,1000);
+        setTimeout(waitJoueur,500);
     }
 }
 function waitTable(){
     recupTable(idPartie);
     if(table == undefined){
-        setTimeout(waitTable,1000); 
+        setTimeout(waitTable,500); 
     }
     else{
         if(table.length == 0){
-            setTimeout(waitTable,1000); 
+            setTimeout(waitTable,500); 
         }
     }
 }
 function waitRole(){
     monIndex = -1
-    console.log("coucou");
     for(let i = 0; i < role.length;i++){
         if(role[i].idUser  == idUser)
         {
@@ -45,6 +44,6 @@ function waitRole(){
     }
     if(monIndex == -1){
         recupRole(idPartie);
-        setTimeout(waitRole,1000);
+        setTimeout(waitRole,500);
     }
 }

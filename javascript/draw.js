@@ -9,6 +9,7 @@ function drawJoueur(){
         ctx.fillStyle = "black";
         ctx.fillText(usersInfo[i].pseudo,dist,25);
         ctx.fillText(usersInfo[i].argent+"$",dist,50);
+        ctx.fillText(ecrireRole(role[i].role),dist,75);
         dist += c.width/usersInfo.length ;
         ctx.stroke(); 
         ctx.closePath();      

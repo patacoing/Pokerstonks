@@ -34,9 +34,10 @@ function init(){
     
 }
 function main(){
+    recupRole(idPartie);
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
-
+    
     if(usersInfo.length > nbj && role[monIndex].role==1)
     {
         genRole();
@@ -51,7 +52,7 @@ function main(){
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     //creerSelect();
     //recupTable(idPartie);
-    setTimeout(main,500);
+    setTimeout(main,50);
 }
 function checkRole(){
     nbj = usersInfo.length;
@@ -71,6 +72,7 @@ function checkRole(){
         creerTable(idPartie,tab[0],tab[0],tab[0],carteManche[0],carteManche[1]);
         waitTable();
         distribCarte(); 
+        waitPaire();
         console.log(carteManche); 
         
     }
@@ -105,6 +107,22 @@ function genRole(){
         roleJoueur = 4;
     }
     creerRole(idPartie,usersInfo[usersInfo.length-1].idUser,roleJoueur);
+}
+function ecrireRole(role){
+    switch(role){
+        case "1":
+            return "dealer";
+        break;
+        case "2":
+            return "big blinde";
+        break;
+        case "3":
+            return "p'tite blinde";
+        break;
+        case "4":
+            return "Joueur"
+        break;
+    }
 }
 function genPlateau()
 {
