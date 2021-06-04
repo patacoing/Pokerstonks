@@ -36,8 +36,9 @@ function main(){
     // oui : monTour = 1;
     // non : monTour = 0;
     recupMaxemise(idPartie);
+    recupMamise(idPartie,idUser);
     waitTable();
-    pot = table.pot;
+    pot = parseInt(table.pot);
     recupDernierCoup(idPartie);
     checkCoup();
 
@@ -46,11 +47,13 @@ function main(){
     passeTour();
     nbj = usersInfo.length; //ancien nb de joueurs
     recupInfoUsers(idPartie);
+    argent = parseInt(usersInfo[monIndex].argent);
         
     if(usersInfo.length > nbj && role[monIndex].role==1)
     {
         genRole();
     }
+   
     if(role[monIndex].role==1  && dernierCoup.idUser == usersInfo[usersInfo.length-1].idUser && temoinShow == 1){
         compteTour();
     }
@@ -59,6 +62,7 @@ function main(){
         checkPartie();
     }
     drawTable();
+    recupMiseJoueur(idPartie);
     drawJoueur();
     drawPot();
     if(maPaire != undefined){
@@ -68,6 +72,8 @@ function main(){
     }
     drawPlateau(table.carte1,table.carte2,table.carte3,table.carte4,table.carte5);
     creerSelect();
+    debut();
+    waitRole();
     setTimeout(main,500);
 }
 function checkRole(){
@@ -162,9 +168,9 @@ function distribCarte(){
     {
         for(let j = 0; j < 2;j++)
         {           
-        alea = parseInt(Math.random()*tab.length)+1;
-        carteJoueur[j] = tab[alea];
-        tab.splice(alea,1);
+            alea = parseInt(Math.random()*tab.length)+1;
+            carteJoueur[j] = tab[alea];
+            tab.splice(alea,1);
         }
         creerPaire(idPartie,usersInfo[i].idUser,carteJoueur[0],carteJoueur[1]);
     }
@@ -225,19 +231,15 @@ function devoilementCarte(){
 
 function checkCoup(){
 
-    if(dernierCoup.length != 0){
-    if(dernierCoup.nextjoueur == idUser) {
-        monTour = 1;
-        enabledButton();
-    }
-    else monTour = 0;
-        nextjoueur = dernierCoup.nextjoueur;
-    }
-    else if(role[monIndex].role==1) {
-        monTour = 1;
-        enabledButton()
-    }
-    else monTour = 0;
+        if(dernierCoup.nextjoueur == idUser && !couche) {
+            monTour = 1;
+            enabledButton();
+        }
+        else {
+            monTour = 0;
+            nextjoueur = dernierCoup.nextjoueur;
+            disabledButton();
+        }
 }
 function passeTour(){
     if(couche && monTour) { //si on est couché et que c'est notre tour, on passe direct au joueur suivant
@@ -261,5 +263,28 @@ function checkPartie(){
             }
         }
 
+    }
+}
+
+
+function debut(){
+    recupCoupsManche(idPartie);
+    if(coupsManche.length == 0 && role[monIndex].role == 1 && usersInfo.length > 1){
+        var caveMin = document.getElementById("caveMin").value;
+        var bigBlinde = caveMin/10;
+        var petiteBlinde = bigBlinde/2;
+        //coup du dealer
+        var index = monIndex;
+        creerCoup(role[index].idUser,3,0,idPartie,nextjoueur,0);
+        //coup de la petite blinde
+
+        if(index+1 > role.length-1) index = 0;
+        else index++;
+        creerCoup(role[index].idUser,3,petiteBlinde,idPartie,nextjoueur,petiteBlinde);
+        //coup de la big blinde
+
+        if(index+1 > role.length-1) index = 0;
+        else index++;
+        creerCoup(role[index].idUser,3,bigBlinde,idPartie,nextjoueur,bigBlinde);
     }
 }

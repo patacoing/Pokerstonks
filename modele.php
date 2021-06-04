@@ -191,6 +191,21 @@ function recupMamise($idManche,$idUser){
     }
     return $maMise;  
 }
-
+function recupMiseJoueur($idPartie){
+    $idManche = idManche($idPartie);
+    $tableau = coupsDansManche($idManche);
+    $users = listeUserDansPartie($idPartie);
+    $miseJoueur = array();
+    for($i=0;$i<count($users);$i++){
+        $miseJoueur[$i] = ['idUser'=>$users[$i]["idUser"],'mise'=>0];
+        for ($j=0; $j <count($tableau); $j++) { 
+            if($tableau[$j]["idUser"] == $users[$i]["idUser"]){
+                $miseJoueur[$i]["idUser"] = $users[$i]["idUser"];
+                $miseJoueur[$i]["mise"] += $tableau[$j]['mise'];
+            } 
+        }
+    }
+    return $miseJoueur;
+}
 
 ?>

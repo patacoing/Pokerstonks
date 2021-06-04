@@ -32,7 +32,8 @@ function enabledButton(){
 }
 
 function parler(){
-    if(monTour && !couche && maMise == maxmise){
+    recupMaxemise(idPartie);
+    if(monTour && !couche && maMise >= maxmise){
         recupMaxemise(idPartie);
         creerCoup(idUser,1,0,idPartie,nextjoueur,maxmise); //fait le coup (ne modifie pas l'argent car argent -0)
         disabledButton();
@@ -43,16 +44,18 @@ function coucher(){
     if(monTour && !couche){
         recupMaxemise(idPartie)
         creerCoup(idUser,2,0,idPartie,nextjoueur,maxmise); //fait le coup (ne modifie pas l'argent car argent -0)
-        seCoucher(idUser);
+        seCoucher(idUser,idPartie);
         disabledButton();
         monTour =0;
-        couche =0;
+        couche =1;
     }
 }
 function miser(){
     if(monTour && !couche && (maMise+deltaMise)>=maxmise && argent-deltaMise >= 0){ // on teste si ce que l'on veut miser est supérieur à la mise maximale de la manche
         maMise += deltaMise;
-        creerCoup(idUser,3,deltaMise,nextjoueur,maMise); //fait le coup et réduit l'argent du joueur
+        console.log("faire coup");
+        creerCoup(idUser,3,deltaMise,idPartie,nextjoueur,maMise+deltaMise); //fait le coup et réduit l'argent du joueur
+        console.log("coup fait");
         monTour = 0;
         disabledButton();
     }
@@ -62,7 +65,7 @@ function suivre(){
         recupMaxemise(idPartie);
         recupMamise(idPartie,idUser);
         deltaMise = maxmise - maMise;
-        if(argent - deltaMise > 0){
+        if(argent - deltaMise > 0 && maMise <= maxmise){
             argent -= deltaMise;
             creerCoup(idUser,4,deltaMise,idPartie,nextjoueur,maxmise); //fait le coup et réduit l'argent du joueur
             disabledButton();

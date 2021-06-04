@@ -10,6 +10,7 @@ function drawJoueur(){
         ctx.fillText(usersInfo[i].pseudo,dist,25);
         ctx.fillText("argent : "+usersInfo[i].argent,dist,50);
         ctx.fillText(ecrireRole(role[i].role),dist,75);
+        ctx.fillText("mise : "+miseJoueur[i].mise,dist,90);
         //il faut afficher la mise de chaque joueur ==> les récupérer
         dist += c.width/usersInfo.length ;
         ctx.stroke(); 
@@ -56,6 +57,6 @@ function drawPot(){
     ctx.beginPath();
     ctx.fillStyle = "black";
     ctx.font = "25px Georgia";
-    ctx.fillText("Pot : "+pot,50,500);
+    ctx.fillText("Pot : "+pot,50,580);
     ctx.closePath();
 }

@@ -25,9 +25,10 @@ var maxmise=0;
 var nextjoueur = 0;
 var maMise=0;
 var dernierCoup;
+var miseJoueur;
 //var tableau;
 //info sur le joueur :
-var argent  =5;
+var argent;
 var couche = 0;
 var carteJoueur = [];
 var deltaMise = 0;

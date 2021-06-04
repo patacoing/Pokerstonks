@@ -30,8 +30,9 @@ for($i=0;$i<count($parties);$i++){
 }
 ?>
 <h2 style="color:white">Créer une partie:</h2>
-<form action="controleur.php">
-<span style="color:white">nombres de joueur</span>
+<form id="form_creation" action="controleur.php" style="color:black;background-color:white;display:inline-block">
+<div>
+    <span>nombres de joueur</span>
     <select name="nbjoueur" >
         <option value="3">3</option>
         <option value="4">4</option>
@@ -40,7 +41,9 @@ for($i=0;$i<count($parties);$i++){
         <option value="7">7</option>
         <option value="8">8</option>
     </select>
-<span style="color:white">temps</span>
+</div>
+<div>
+    <span>temps</span>
     <select name="temps">
         <option value="5">5</option>
         <option value="10">10</option>
@@ -49,13 +52,16 @@ for($i=0;$i<count($parties);$i++){
         <option value="25">25</option>
         <option value="30">30</option>
     </select>
-<span style="color:white">cave minimale:</span>
+</div>
+<div>
+    <span>cave minimale:</span>
     <select name="cave">
         <option value="200000">200 000</option>
         <option value="500000">500 000</option>
         <option value="1000000">1 000 000</option>
         <option value="10000000">10 000 000</option>
     </select>
+</div>
     <input type="submit" name="action" value="Créer"> 
 </form>
 <?php
