@@ -106,7 +106,7 @@ function recupMamise(idPartie,idUser){
 }
 
 function recupDernierCoup(idPartie){
-    recupCoupsManche(idPartie);Modules :
+    recupCoupsManche(idPartie);
     var i=-1;
     for(let j=0;j<coupsManche.length;j++){
         if(coupsManche[j].idcoup > i) i = j;
