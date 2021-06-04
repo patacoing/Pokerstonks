@@ -60,6 +60,7 @@ function main(){
     }
     drawTable();
     drawJoueur();
+    drawPot();
     if(maPaire != undefined){
         if(maPaire.length !=0){
             drawPerso(maPaire.carte1,maPaire.carte2);

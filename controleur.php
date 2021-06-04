@@ -56,11 +56,15 @@ switch($action){
     case "Rejoindre":
         if($pseudo = valider("pseudo","SESSION"))
         if($idPartie = valider("idPartie"))
-        if($caveMin = valider("caveMin")){
+        if($caveMin = valider("caveMin"))
+        if($caveMin < valider("argent","SESSION"))
+        {
+
             addJoueurPartie($idPartie,$_SESSION["idUser"]);
             $qs = "?view=partie&idPartie=$idPartie&caveMin=$caveMin";
             setcookie("idPartie",$idPartie,time()+3600*24*30);
-    }else $qs = "?view=jouer";
+        }
+        else $qs = "?view=jouer";
     break;
     case "Quitter":
         if($pseudo = valider("pseudo","SESSION"))
